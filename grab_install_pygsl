@@ -1,0 +1,24 @@
+#!/bin/bash
+start_dir=`pwd`
+
+echo "*** Grabbing and installing pygsl ***"
+#Pull in general lofar build config:
+. `dirname ${0}`/CONFIG
+
+mkdir -p ${LOFAR_DEPS_ROOT}/pygsl
+cd ${LOFAR_DEPS_ROOT}/pygsl
+if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
+  wget http://downloads.sourceforge.net/project/pygsl/pygsl/pygsl-0.9.5/pygsl-0.9.5.tar.gz .
+  gunzip pygsl-0.9.5.tar.gz
+  tar xf pygsl-0.9.5.tar
+fi
+
+cd pygsl-0.9.5
+python setup.py install --prefix=$PYGSL_ROOT_DIR
+
+#symlinks
+
+mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages
+ln -sfn $PYGSL_ROOT_DIR/lib/python${LOFAR_PYTHON_VERSION}/site-packages ${STABLE_SOFT_DIR}/symlinks/python-packages/pygsl
+
+cd $start_dir

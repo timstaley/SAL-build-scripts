@@ -1,0 +1,69 @@
+#!/bin/bash
+####################################################################
+startdir=`pwd`
+BUILD_SCRIPTS_DIR=`dirname ${0}`
+BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+
+cd $ARCHIVE_LATEST_DIR_LINK
+TARGET=`pwd -P`
+
+SYMLINKS=$TARGET/symlinks
+echo "Installing into $TARGET"
+
+####################################################################
+echo "*** Building Lofar Offline package... ***"
+
+cd $LOFAR_SVNROOT
+
+SVN_REV=$(get_git_svnrev)
+GIT_HASH=$(get_git_short_hash)
+LOFAR_REV="${SVN_REV}_${GIT_HASH}"
+LOFAR_TARGET=$TARGET/LOFAR_r${LOFAR_REV}
+
+echo "Regenerating cmake package list:"
+bash $LOFAR_SVNROOT/CMake/gen_LofarPackageList_cmake.sh
+sleep 0.5
+echo "Done."
+
+#Put the symlinks in place first, 
+#so if the build fails we can manually fix it and they're ready to go.
+
+ln -sfn $LOFAR_TARGET $SYMLINKS/lofar-root #for setting $LOFARROOT
+ln -sfn $LOFAR_TARGET/bin $SYMLINKS/bin/lofar
+ln -sfn $LOFAR_TARGET/lib $SYMLINKS/lib/lofar
+ln -sfn $LOFAR_TARGET/lib/python${LOFAR_PYTHON_VERSION}/dist-packages/ $SYMLINKS/python-packages/lofar
+
+cd $LOFAR_SRC_ROOT
+rm -rf build/
+mkdir -p build/gnu_opt
+cd build/gnu_opt
+
+#mkdir -p build/gnu_debug
+#cd build/gnu_debug
+
+cmake_command="cmake $LOFAR_SVNROOT \
+    -DCASACORE_ROOT_DIR=${SYMLINKS}/casacore-root \
+    -DPYRAP_ROOT_DIR=${SYMLINKS}/pyrap-root         \
+    -DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR     \
+    -DCASAREST_ROOT_DIR=${SYMLINKS}/casarest-root   \
+    -DLOG4CPLUS_ROOT_DIR=$LOG4CPLUS_ROOT_DIR   \
+    -DBUILD_SHARED_LIBS=ON                 \
+    -DBUILD_PACKAGES=\"LofarFT Offline\"        \
+    -DCMAKE_INSTALL_PREFIX=$LOFAR_TARGET 	\
+	-DUSE_OPENMP=ON	\
+"
+echo $cmake_command > cmake_command.sh
+# Weirdly, this fails if we call it directly as "$cmake_command"
+# but running in under a fresh shell works. 
+# This is why scripting in bash sucks.
+bash cmake_command.sh
+check_result "lofar" "cmake" $?
+
+make -j$LOFAR_BUILD_NJOBS
+check_result "Lofar offline" "make" $?
+make install
+check_result "Lofar offline" "make install" $?
+cd $startdir
+

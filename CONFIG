@@ -1,0 +1,60 @@
+#!/bin/bash
+
+BUILD_SCRIPTS_DIR=`dirname ${0}`
+BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+
+source $BUILD_SCRIPTS_DIR/CONFIG_NJOBS #LOFAR_BUILD_NJOBS=???
+
+#------------------------------------------------------------------------------
+#Where to store the stable packages
+LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
+
+#Where to checkout the development repositories
+SVN_GRP_DIR=~/code/lofar_svn_repos
+
+#Where to find the ASKAP sources to pull into the LOFAR tree
+ASKAP_SRC_DIR=~/code/ASKAPsoft
+
+#Where to find local Lofar patches:
+PATCHES_GRP_DIR=$BUILD_SCRIPTS_DIR
+
+#------------------------------------------------------------------------------
+## Install dirs:
+
+# Stable software parent dir:
+STABLE_SOFT_DIR=/opt/soft
+
+# Lofar Builds parent dir:
+LOFAR_BUILDS_ARCHIVE_DIR=/opt/lofar-archive
+
+#Most recent build target dir symlink:
+ARCHIVE_LATEST_DIR_LINK=/opt/lofar-latest
+
+#------------------------------------------------------------------------------
+# Stable subdirs:
+WCSLIB_ROOT_DIR=$STABLE_SOFT_DIR/builds/wcslib-4.8.2
+LOG4CPLUS_ROOT_DIR=$STABLE_SOFT_DIR/builds/log4cplus-1.0.4
+PYGSL_ROOT_DIR=$STABLE_SOFT_DIR/builds/pygsl-0.9.5
+PYSCOPG_ROOT_DIR=$STABLE_SOFT_DIR/builds/psycopg2-2.4.2
+
+#------------------------------------------------------------------------------
+PYRAP_SVNROOT=${SVN_GRP_DIR}/pyrap_checkout
+CASACORE_SVNROOT=${SVN_GRP_DIR}/casacore_checkout/casacore
+CASAREST_SVNROOT=${SVN_GRP_DIR}/casarest_checkout
+
+LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout #will make build directory here.
+LOFAR_SVNROOT=$LOFAR_SRC_ROOT/LOFAR #Top dir of svn checkout Has to be "LOFAR" or the build will complain.
+
+TKP_SVNROOT=${SVN_GRP_DIR}/tkp_checkout
+
+LUS_SVNROOT=${SVN_GRP_DIR}/LUS_repos/lofarsoft
+
+#------------------------------------------------------------------------------
+LOFAR_PYTHON_VERSION=`python -c "import sys; print sys.version[:3]"`
+
+
+
+echo "*** Dependency sources located at: $LOFAR_DEPS_ROOT ***"
+echo "*** Lofar trunk at: $LOFAR_SRC_ROOT ***"
+echo "*** Will build to: $LOFAR_BUILDS_ARCHIVE_DIR ***"
+

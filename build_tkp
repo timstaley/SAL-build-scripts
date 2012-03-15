@@ -1,0 +1,80 @@
+#!/bin/bash
+####################################################################
+startdir=`pwd`
+BUILD_SCRIPTS_DIR=`dirname ${0}`
+BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+
+cd $ARCHIVE_LATEST_DIR_LINK
+TARGET=`pwd -P`
+
+SYMLINKS=$TARGET/symlinks
+echo "Installing into $TARGET"
+
+####################################################################
+echo 
+echo "**** Building TKP... **** "
+
+cd $TKP_SVNROOT
+SVN_REV=$(get_git_svnrev)
+GIT_HASH=$(get_git_short_hash)
+TKP_REV="${SVN_REV}_${GIT_HASH}"
+TKP_TARGET=$TARGET/tkp_r${TKP_REV}
+
+echo "TKP target is $TKP_TARGET"
+
+ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/tkp
+ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
+
+rm -rf $TKP_SVNROOT/build 
+mkdir $TKP_SVNROOT/build
+cd $TKP_SVNROOT/build
+
+cmake_command="cmake $TKP_SVNROOT -DCMAKE_INSTALL_PREFIX=${TKP_TARGET} 
+		-DTKP_DEVELOP=1 
+		-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR"
+echo $cmake_command > cmake_command.sh
+bash cmake_command.sh
+check_result "tkp" "cmake" $?
+
+make -j$LOFAR_BUILD_NJOBS
+check_result "tkp" "build" $?
+make install
+check_result "tkp" "install" $?
+ 
+ln -sfn $TKP_TARGET $SYMLINKS/tkp-root #for finding the TKP recipes directory
+
+#host=lofar1
+#echo "Setting up TKP test database"
+#mkdir -p database
+#rsync -a --exclude=".svn" ../database/trunk/database/pipeline_develop/MonetDB/ database
+#bash ./database/batches/setup.db.batch $host tkptest
+#mkdir -p tkpconfigdir
+#cat > tkpconfigdir/tkp.cfg <<EOF
+#[database]
+#enabled = True
+#host = $host
+#name = tkptest
+#user = tkptest
+#password = tkptest
+#engine = monetdb
+#autocommit = False
+#[test]
+#datapath = /home/ts3e11/code/tkp_data/post_build_testdata/data
+#EOF
+
+#export TKPCONFIGDIR=`pwd -P`"/tkpconfigdir"
+
+#echo "Copying files for in-build tests"
+#mkdir -p tkp/trunk/tests
+#rsync -a --exclude=".svn" ../tkp/trunk/tests/ tkp/trunk/tests
+#echo "\nRunning tests..."
+#ctest -VV --output-on-failure
+#unset TKPCONFIGDIR
+#monetdb stop tkptest
+#monetdb destroy -f tkptest
+
+
+cd $startdir
+

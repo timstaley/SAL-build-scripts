@@ -1,0 +1,39 @@
+#!/bin/bash
+####################################################################
+startdir=`pwd`
+BUILD_SCRIPTS_DIR=`dirname ${0}`
+BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+
+cd $ARCHIVE_LATEST_DIR_LINK
+TARGET=`pwd -P`
+
+SYMLINKS=$TARGET/symlinks
+echo "Installing into $TARGET"
+
+####################################################################
+echo "*** Building pyrap... ***"
+cd $PYRAP_SVNROOT
+
+SVN_REV=$(get_git_svnrev)
+GIT_HASH=$(get_git_short_hash)
+PYRAP_REV="${SVN_REV}_${GIT_HASH}"
+
+PYRAP_TARGET=$TARGET/pyrap_r${PYRAP_REV}
+build_command="./batchbuild-trunk.py  --prefix=$PYRAP_TARGET --casacore-root=${SYMLINKS}/casacore-root \
+	--python-prefix=$PYRAP_TARGET/pythonpackage --wcs-root=$WCSLIB_ROOT_DIR install"
+echo "$build_command" > lofar_build_command.sh
+$build_command
+
+check_result "pyrap" "batchbuild-trunk" $?
+ln -sfn $PYRAP_TARGET $SYMLINKS/pyrap-root
+ln -sfn $PYRAP_TARGET/lib $SYMLINKS/lib/pyrap
+
+
+
+#make .pth paths absolute, so we can symlink to it:
+sed -i "s@^./@${PYRAP_TARGET}/pythonpackage/@g" \
+	${PYRAP_TARGET}/pythonpackage/easy-install.pth
+ln -sfn ${PYRAP_TARGET}/pythonpackage/easy-install.pth $SYMLINKS/python-packages/pyrap.pth 
+

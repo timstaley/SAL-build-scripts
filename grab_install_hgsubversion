@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p /opt/soft/mercurial_extensions
+hg clone http://bitbucket.org/durin42/hgsubversion/ /opt/software/mercurial_extensions/hgsubversion
+echo "hgsubversion = /opt/software/mercurial_extensions/hgsubversion/hgsubversion" | sudo tee -a /etc/mercurial/hgrc.d/hgext.rc
+
+##Now try 
+# hg help hgsubversion

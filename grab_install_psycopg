@@ -1,0 +1,25 @@
+#!/bin/bash
+start_dir=`pwd`
+
+echo "*** Grabbing and installing pygsl ***"
+#Pull in general lofar build config:
+. `dirname ${0}`/CONFIG
+
+
+mkdir -p ${LOFAR_DEPS_ROOT}/pyscopg
+cd ${LOFAR_DEPS_ROOT}/pyscopg
+if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
+  wget http://initd.org/psycopg/tarballs/PSYCOPG-2-4/psycopg2-2.4.2.tar.gz .
+  gunzip psycopg2-2.4.2.tar.gz
+  tar xf psycopg2-2.4.2.tar
+fi
+
+cd psycopg2-2.4.2
+python setup.py install --prefix=$PYSCOPG_ROOT_DIR
+
+#symlinks
+
+mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages
+ln -sfn $PYGSL_ROOT_DIR/lib/python${LOFAR_PYTHON_VERSION}/site-packages ${STABLE_SOFT_DIR}/symlinks/python-packages/pyscopg
+
+cd $start_dir

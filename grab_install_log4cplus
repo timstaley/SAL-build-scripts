@@ -1,0 +1,21 @@
+#!/bin/bash
+start_dir=`pwd`
+
+echo "*** Grabbing and installing log4cplus ***"
+
+#Pull in general lofar build config:
+. `dirname ${0}`/CONFIG
+
+mkdir -p ${LOFAR_DEPS_ROOT}/log4cplus
+cd ${LOFAR_DEPS_ROOT}/log4cplus
+if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
+  wget http://downloads.sourceforge.net/project/log4cplus/log4cplus-stable/1.0.4/log4cplus-1.0.4.tar.bz2 .
+  bunzip2 log4cplus-1.0.4.tar.bz2 
+  tar xf log4cplus-1.0.4.tar
+fi
+cd log4cplus-1.0.4
+./CONFIGure --prefix=$LOG4CPLUS_ROOT_DIR
+make install
+export LOG4CPLUS_ROOT_DIR
+
+cd $start_dir

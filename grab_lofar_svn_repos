@@ -1,0 +1,46 @@
+#!/bin/bash
+#-------------------------------------------------------------------------------
+#Pull in general lofar build config:
+. `dirname ${0}`/CONFIG
+. `dirname ${0}`/utils.sh
+
+#-------------------------------------------------------------------------------
+# Do lofar /tkp checkouts first, so as to prompt the user for a password if necessary
+# NB: note the username encoded in the URLS below.
+
+echo "*** Checking out LOFAR ***"
+mkdir -p $LOFAR_SVNROOT 
+git svn clone -r20400 https://staley@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
+cd $LOFAR_SVNROOT
+git svn fetch #For some reason, (https?) extra step required here.
+check_result "lofar repo" "get" $?
+#-------------------------------------------------------------------------------
+echo "*** Checking out TKP ***"
+mkdir -p  $TKP_SVNROOT
+git svn clone  -r2700 http://ts@svn.transientskp.org/code/  $TKP_SVNROOT
+check_result "tkp repo" "get" $?
+#-------------------------------------------------------------------------------
+echo "*** Checking out casacore ***"
+mkdir -p  $CASACORE_SVNROOT 
+git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
+check_result "casacore repo" "get" $?
+
+echo "*** Checking out pyrap ***"
+mkdir -p $PYRAP_SVNROOT
+git svn clone -r314 http://pyrap.googlecode.com/svn/trunk/ $PYRAP_SVNROOT
+cd $PYRAP_SVNROOT
+git svn fetch
+check_result "pyrap repo" "get" $?
+
+echo "*** Checking out casarest ***"
+mkdir -p $CASAREST_SVNROOT
+git svn clone svn://lofar9.astron.nl/var/svn/repos/trunk/casarest $CASAREST_SVNROOT
+check_result "casarest repo" "get" $?
+#-------------------------------------------------------------------------------
+echo "*** Checking out LUS ***"
+mkdir -p $LUS_SVNROOT
+git svn clone -r 9750 http://usg.lofar.org/svn/code/trunk $LUS_SVNROOT
+check_result "LUS repo" "get" $?
+#-------------------------------------------------------------------------------
+echo "*** LOFAR svn group repos checked out successfully *** "
+

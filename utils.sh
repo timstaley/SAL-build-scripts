@@ -1,35 +1,47 @@
-send_mail() {
-    echo "${2}" | mail -s "Build failure on heastro1: ${1}" jds
-}
-
 check_result() {
     COMPONENT=${1}
     STEP=${2}
-    TARGET=${3}
-    RESULT=${4}
+    RESULT=${3}
     if [ $RESULT -ne 0 ]
     then
         message="$STEP failed: returned value $RESULT"
-        echo $message
-        send_mail $COMPONENT "$message"
-        rm -rf $TARGET
+        echo
+        echo "**** ERROR: $COMPONENT: $message ****"
         exit 1
     fi
 }
 
 update_source() {
-    SOURCENAME=${1}
-    SOURCEDIR=${2}
-    REVISION=${3}
+    SOURCEDIR=${1}
+    REVISION=${2}
     cd $SOURCEDIR
-    echo "Updating $SOURCENAME sources."
+		echo 
+		echo
+    echo "*** Updating sources at $SOURCEDIR. ***"
     git clean -df
+    check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
     git svn rebase
-    if [ $REVISION ]
-    then
-        echo "Checking out r$REVISION."
-        git checkout `git svn find-rev r$REVISION`
+    check_result "$SOURCEDIR update" "svn rebase" $?
+    if [ $REVISION ];    then
+    	echo "*** Checking out r$REVISION. *** "
+			GIT_HASH=`git svn find-rev r$REVISION`
+			if [[ -z $GIT_HASH ]]; then
+				echo 
+				echo 
+				echo "**** ERROR: rev $REVISION not found at $SOURCEDIR$ ****"
+				exit
+			fi
+      git checkout $GIT_HASH
+	    check_result "$SOURCEDIR update" "rev change" $?
+			unset GIT_HASH
     fi
-    VERSION=`git svn find-rev HEAD`
+}
+
+get_git_svnrev(){
+echo `git svn find-rev HEAD`
+}
+
+get_git_short_hash(){
+echo `git log --pretty=format:'%h' -n 1`
 }
