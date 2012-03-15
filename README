@@ -1,1 +1,10 @@
 LOFAR/TKP Build scripts in use on the Southampton cluster.
+
+See DEPLOY_README.sh for flow.
+
+Note to self: 
+git clone -b soton etc.
+or 
+git checkout -b soton origin/soton
+
+To grab a non-standard branch from github.
