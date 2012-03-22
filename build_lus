@@ -35,7 +35,19 @@ bash bootstrap_command.sh
 check_result "LUS" "bootstrap" $?
 cd $LUS_SVNROOT/build 
 make anaamika -j${LOFAR_BUILD_NJOBS}
-check_result "LUS" "make" $?
+check_result "LUS" "make anaamika" $?
+
+
+export LOFARSOFT=$LUS_SVNROOT
+source $LUS_SVNROOT/devel_common/scripts/init.sh
+make pulsar -j${LOFAR_BUILD_NJOBS}
+check_result "LUS" "make pulsar" $?
+PULSAR_TARGET=$TARGET/pulsar_r${LUS_REV}
+mkdir -p $PULSAR_TARGET
+cp -r $LUS_SVNROOT/release/share/pulsar $PULSAR_TARGET
+ln -sfn $PULSAR_TARGET $SYMLINKS/pulsar-root
+
+unset LOFARSOFT
 
 ln -sfn ${LUS_TARGET}/bin ${SYMLINKS}/bin/lus 
 cd $startdir

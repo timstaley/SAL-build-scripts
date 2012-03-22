@@ -33,12 +33,12 @@ unset collated_paths_folder
 cd $archive_target_dir/symlinks/lofar-root  
 export LOFARROOT=`pwd -P`
 mkdir -p $HOME/.lofar
-echo "`date` --- $LOFARROOT" >> $HOME/.lofar/builds_used.log
+echo "`date` --- $LOFARROOT" >> $HOME/.lofar/pipeline_builds_used.log
 
 cd $LOFARROOT/../..
-echo "`date` --- $LOFARROOT --- `whoami` --- `hostname`" >> lofar_versions_used.log
+echo "`date` --- $LOFARROOT --- `whoami` --- `hostname`" >> pipeline_builds_used.log
 
-cd $start_dir
+
 
 ################################################################
 #Symlink in the python package paths for PYRAP
@@ -48,5 +48,5 @@ ln -sfn $archive_target_dir/symlinks/python-packages/pyrap.pth ~/.local/lib/pyth
 
 #################################################################
 
-
+cd $start_dir
 unset start_dir
