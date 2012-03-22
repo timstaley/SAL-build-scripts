@@ -60,12 +60,22 @@ mkdir -p $SYMLINKS/lib
 mkdir -p $SYMLINKS/python-packages
 
 #------------------------------------------------------------------------------
-#Create init file
-echo "Generating init.sh."
+#Create imaging /tkp pipeline init file
+echo "Generating init-lofar.sh."
 INITFILE=$TARGET/init-lofar.sh
 cat > $INITFILE <<-END
 archive_target_dir=$TARGET
-source $LOFAR_BUILDS_ARCHIVE_DIR/set_lofar_env_paths.sh
+source $LOFAR_BUILDS_ARCHIVE_DIR/set_lofar_pipeline_env_paths.sh
+unset archive_target_dir #because we need to "source" this file.
+END
+
+#------------------------------------------------------------------------------
+#Create pulsar tools init file
+echo "Generating init-pulsar.sh."
+INITFILE=$TARGET/init-pulsar.sh
+cat > $INITFILE <<-END
+archive_target_dir=$TARGET
+source $LOFAR_BUILDS_ARCHIVE_DIR/set_lus_pulsar_env_paths.sh
 unset archive_target_dir #because we need to "source" this file.
 END
 
@@ -79,7 +89,9 @@ export archive_target_dir=$TARGET
 bash $LOFAR_BUILDS_ARCHIVE_DIR/collate_lofar_symlinks.sh
 unset archive_target_dir    #in case we "source" this file
 END
+
 #------------------------------------------------------------------------------
+
 #Begin builds:
 bash $BUILD_SCRIPTS_DIR/build_casacore
 check_result "casacore" "build script" $?
