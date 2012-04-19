@@ -17,6 +17,9 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 ## http://casa.nrao.edu/casa_obtaining.shtml
 
 ########################################################
+# For successful unit testing, you will also need python-xmlrunner:
+# https://launchpad.net/ubuntu/+source/python-xmlrunner/1.2-1
+########################################################
 ##NB for comparison, you can get your own package list using 
 # dpkg --get-selections
 
