@@ -14,7 +14,7 @@ update_repos="true"
 #unset update_repos #(false)
 
 #LOFAR_REV=20457
-
+#CASACORE_REV=21227
 if [[ -n $update_repos ]]; then
 	update_source $CASACORE_SVNROOT $CASACORE_REV
 	update_source $CASAREST_SVNROOT $CASAREST_REV
@@ -108,4 +108,6 @@ check_result "lus" "build script" $?
 
 bash $COLLATE_SCRIPT
 
+echo 
+echo "*** Build completed successfully ***"
 
