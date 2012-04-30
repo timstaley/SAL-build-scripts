@@ -34,8 +34,8 @@ echo $bootstrap_command > bootstrap_command.sh
 bash bootstrap_command.sh
 check_result "LUS" "bootstrap" $?
 cd $LUS_SVNROOT/build 
-make anaamika -j${LOFAR_BUILD_NJOBS}
-check_result "LUS" "make anaamika" $?
+make pybdsm -j${LOFAR_BUILD_NJOBS}
+check_result "LUS" "make pybdsm" $?
 
 
 #export LOFARSOFT=$LUS_SVNROOT
@@ -50,5 +50,6 @@ check_result "LUS" "make anaamika" $?
 #unset LOFARSOFT
 
 ln -sfn ${LUS_TARGET}/bin ${SYMLINKS}/bin/lus 
+ln -sfn ${LUS_TARGET}/lib/python ${SYMLINKS}/python-packages/lus
 cd $startdir
 
