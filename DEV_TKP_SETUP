@@ -1,0 +1,32 @@
+#!/bin/bash
+####################################################################
+
+## Messes with the 'lofar-latest' installation in order to create a development setup.
+
+TKP_DEV_ROOT=$HOME/code/tkp-dev
+
+####################################################################
+startdir=`pwd`
+BUILD_SCRIPTS_DIR=`dirname ${0}`
+BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+
+cd $ARCHIVE_LATEST_DIR_LINK
+TARGET=`pwd -P`
+
+SYMLINKS=$TARGET/symlinks
+echo "**** Setting up tkp-dev links from folder $TARGET ****"
+
+####################################################################
+cd $SYMLINKS/tkp-root/lib/python
+mv tkp tkp-backup
+ln -s ${TKP_DEV_ROOT}/tkp/trunk/tkp tkp
+
+cd $SYMLINKS/tkp-root
+mv recipes recipes-backup
+ln -s ${TKP_DEV_ROOT}/trap/trunk/recipes recipes
+
+
+cd $startdir
+

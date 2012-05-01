@@ -54,7 +54,7 @@ LOFAR_PYTHON_VERSION=`python -c "import sys; print sys.version[:3]"`
 
 
 
-echo "*** Dependency sources located at: $LOFAR_DEPS_ROOT ***"
-echo "*** Lofar trunk at: $LOFAR_SRC_ROOT ***"
-echo "*** Will build to: $LOFAR_BUILDS_ARCHIVE_DIR ***"
+#echo "*** Dependency sources located at: $LOFAR_DEPS_ROOT ***"
+#echo "*** Lofar trunk at: $LOFAR_SRC_ROOT ***"
+#echo "*** Will build to: $LOFAR_BUILDS_ARCHIVE_DIR ***"
 
