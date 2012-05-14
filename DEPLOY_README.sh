@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Uber script for running a lofar install on a fresh machine
 ## and / or  Notes to explain the flow:
 
@@ -10,6 +12,7 @@
 
 BUILD_SCRIPTS_DIR=`dirname ${0}`
 BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+. $BUILD_SCRIPTS_DIR/CONFIG
 
 ########################################################
 
@@ -29,12 +32,13 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
 ########################################################
 #DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
-bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
-bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
-bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
-bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
 
-bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
+#bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
+#bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
+#bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
+#bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
+
+#bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
 
 ########################################################
 

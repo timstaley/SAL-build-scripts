@@ -50,6 +50,7 @@ echo
 echo "*** Creating install directories ***"
 TARGET=$LOFAR_BUILDS_ARCHIVE_DIR/`date +%F-%H-%M`
 echo "Target: ${TARGET}"
+mkdir -p $TARGET
 
 #Make a pointer to the archive directory, so that other build scripts can find it at a later date.
 ln -sfn $TARGET $ARCHIVE_LATEST_DIR_LINK 
