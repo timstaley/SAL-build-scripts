@@ -1,32 +1,29 @@
-libboost-all-dev				install
-libreadline-dev					install
-liblog4cxx10-dev				install
-libblitz0-dev					install
-bison						install
-flex						install
-libhdf5-serial-dev				install
-libpqxx3-dev					install
-libxml2-dev					install
-liblapack-dev					install
-libpng12-dev					install
-libgsl0-dev					install
-libfftw3-dev					install
-libcfitsio3-dev					install
-liblog4cxx10-dev				install
-subversion					install
-git-svn						install
-python-setuptools				install
-postgresql-client-common			install
-postgresql					install
-python-qt4					install
-cmake						install
-scons						install
-gfortran					install
-python-scipy					install
-python-pyfits					install
-python-tz					install
-procmail					install
-xvfb						install
-
-
-
+libboost-all-dev				
+libreadline-dev
+liblog4cxx10-dev				
+libblitz0-dev					
+bison						
+flex						
+libhdf5-serial-dev
+libpqxx3-dev				
+libxml2-dev					
+liblapack-dev				
+libpng12-dev				
+libgsl0-dev					
+libfftw3-dev				
+libcfitsio3-dev				
+liblog4cxx10-dev			
+subversion					
+git-svn						
+python-setuptools				
+postgresql-client-common			
+postgresql					
+python-qt4					
+cmake						
+scons						
+gfortran					
+python-scipy				
+python-pyfits				
+python-tz					
+procmail					
+xvfb						

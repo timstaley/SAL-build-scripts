@@ -10,11 +10,12 @@ cd ${LOFAR_DEPS_ROOT}/wcslib
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
   wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 .
   bunzip2 wcslib.tar.bz2 
-  tar xf wcslib.tar
-fi
 
+fi
+rm -rf wcslib-4.8.2
+tar xf wcslib.tar
 cd wcslib-4.8.2
-./CONFIGure --prefix=$WCSLIB_ROOT_DIR
+./configure --prefix=$WCSLIB_ROOT_DIR
 make install
 
 #create symlink so libpath gets picked up by the init script

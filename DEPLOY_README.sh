@@ -20,21 +20,15 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 # For successful unit testing, you will also need python-xmlrunner:
 # https://launchpad.net/ubuntu/+source/python-xmlrunner/1.2-1
 ########################################################
-##NB for comparison, you can get your own package list using 
-# dpkg --get-selections
 
-## Required on a fresh Ubuntu install:
-#sudo dpkg --set-selections < LOFAR_package_list
-
-## NB it's possible I've still forgotten to list a package or 2, to be sure you could use 
-#sudo dpkg --set-selections < full_package_list
-
-## Runs the package install.
-#sudo apt-get -u dselect-upgrade 
-##(You can safely select "no config" if a 'postfix' config screen comes up)
+##Ok, install packages:
+## The standard method uses dpkg --set-selections, but that has proven buggy for me (TS, Ubuntu 12.04)
+## instead I recommend:
+# sudo apt-get install  $(< LOFAR_package_list_Ubuntu_12.04)
 
 
 ########################################################
+#DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
 bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
 bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
@@ -44,14 +38,17 @@ bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
 
 ########################################################
 
+
+
+########################################################
 #To do - source these paths from CONFIG
 mkdir -p ${STABLE_SOFT_DIR}
-cp ${BUILD_SCRIPTS_DIR}/init_scripts/soft/init-soft.sh ${STABLE_SOFT_DIR}
-cp ${BUILD_SCRIPTS_DIR}/init_scripts/soft/reset-paths.sh ${STABLE_SOFT_DIR}
+ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/init-soft.sh ${STABLE_SOFT_DIR}
+ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/reset-paths.sh ${STABLE_SOFT_DIR}
 
 mkdir -p ${LOFAR_BUILDS_ARCHIVE_DIR}
-cp ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/set_lofar_env_paths.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
-cp ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/collate_lofar_symlinks.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
+ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/set_lofar_env_paths.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
+ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/collate_lofar_symlinks.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
 
 ########################################################
 ## Build!

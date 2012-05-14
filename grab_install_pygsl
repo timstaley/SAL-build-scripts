@@ -10,9 +10,9 @@ cd ${LOFAR_DEPS_ROOT}/pygsl
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
   wget http://downloads.sourceforge.net/project/pygsl/pygsl/pygsl-0.9.5/pygsl-0.9.5.tar.gz .
   gunzip pygsl-0.9.5.tar.gz
-  tar xf pygsl-0.9.5.tar
 fi
-
+rm -rf pygsl-0.9.5
+tar xf pygsl-0.9.5.tar
 cd pygsl-0.9.5
 python setup.py install --prefix=$PYGSL_ROOT_DIR
 

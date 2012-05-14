@@ -3,7 +3,7 @@
 BUILD_SCRIPTS_DIR=`dirname ${0}`
 BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
-source $BUILD_SCRIPTS_DIR/CONFIG_NJOBS #LOFAR_BUILD_NJOBS=???
+source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #LOFAR_BUILD_NJOBS=???
 
 #------------------------------------------------------------------------------
 #Where to store the stable packages

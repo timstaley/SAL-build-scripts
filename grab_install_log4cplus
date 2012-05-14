@@ -11,10 +11,12 @@ cd ${LOFAR_DEPS_ROOT}/log4cplus
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
   wget http://downloads.sourceforge.net/project/log4cplus/log4cplus-stable/1.0.4/log4cplus-1.0.4.tar.bz2 .
   bunzip2 log4cplus-1.0.4.tar.bz2 
-  tar xf log4cplus-1.0.4.tar
+
 fi
+rm -rf log4cplus-1.0.4
+tar xf log4cplus-1.0.4.tar
 cd log4cplus-1.0.4
-./CONFIGure --prefix=$LOG4CPLUS_ROOT_DIR
+./configure --prefix=$LOG4CPLUS_ROOT_DIR
 make install
 export LOG4CPLUS_ROOT_DIR
 
