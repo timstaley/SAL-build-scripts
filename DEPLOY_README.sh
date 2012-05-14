@@ -31,6 +31,7 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
 ## Runs the package install.
 #sudo apt-get -u dselect-upgrade 
+##(You can safely select "no config" if a 'postfix' config screen comes up)
 
 
 ########################################################

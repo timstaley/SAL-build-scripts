@@ -5,7 +5,8 @@ libblitz0-dev					install
 bison						install
 flex						install
 libhdf5-serial-dev				install
-libpqxx3-dev					install
+libpq5					install
+postgresql-8.4          install
 libxml2-dev					install
 liblapack-dev					install
 libpng12-dev					install
@@ -14,9 +15,7 @@ libfftw3-dev					install
 libcfitsio3-dev					install
 liblog4cxx10-dev				install
 subversion					install
-mercurial					install
-python-subversion				install
-python-subvertpy				install
+git-svn						install
 python-setuptools				install
 postgresql-client-common			install
 postgresql					install
@@ -29,4 +28,6 @@ python-pyfits					install
 python-tz					install
 procmail					install
 xvfb						install
+
+
 
