@@ -10,7 +10,7 @@ source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #LOFAR_BUILD_NJOBS=???
 LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
 
 #Where to checkout the development repositories
-SVN_GRP_DIR=~/code/lofar_svn_repos
+SVN_GRP_DIR=/opt/repos
 
 #Where to find the ASKAP sources to pull into the LOFAR tree
 ASKAP_SRC_DIR=~/code/ASKAPsoft
