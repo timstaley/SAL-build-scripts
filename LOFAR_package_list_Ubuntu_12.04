@@ -5,7 +5,7 @@ libblitz0-dev
 bison						
 flex						
 libhdf5-serial-dev
-libpq5					
+libpqxx3-dev				
 libxml2-dev					
 liblapack-dev				
 libpng12-dev				
