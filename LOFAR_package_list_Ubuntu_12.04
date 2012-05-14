@@ -1,4 +1,4 @@
-libboost-all-dev				
+libboost1.46-all-dev				
 libreadline-dev
 liblog4cxx10-dev				
 libblitz0-dev					
