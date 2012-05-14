@@ -34,8 +34,10 @@ echo $bootstrap_command > bootstrap_command.sh
 bash bootstrap_command.sh
 check_result "LUS" "bootstrap" $?
 cd $LUS_SVNROOT/build 
-make pybdsm -j${LOFAR_BUILD_NJOBS}
-check_result "LUS" "make pybdsm" $?
+
+## pybdsm has been moved to the lofar pipeline repository.
+#make pybdsm -j${LOFAR_BUILD_NJOBS}
+#check_result "LUS" "make pybdsm" $?
 
 
 #export LOFARSOFT=$LUS_SVNROOT

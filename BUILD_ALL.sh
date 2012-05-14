@@ -105,8 +105,10 @@ bash $BUILD_SCRIPTS_DIR/build_lofar
 check_result "lofar" "build script" $?
 bash $BUILD_SCRIPTS_DIR/build_tkp
 check_result "tkp" "build script" $?
-bash $BUILD_SCRIPTS_DIR/build_lus
-check_result "lus" "build script" $?
+
+## pybdsm has been moved to the lofar pipeline repository.
+#bash $BUILD_SCRIPTS_DIR/build_lus
+#check_result "lus" "build script" $?
 
 bash $COLLATE_SCRIPT
 
