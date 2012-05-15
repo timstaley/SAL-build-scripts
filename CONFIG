@@ -5,6 +5,11 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
 source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #LOFAR_BUILD_NJOBS=???
 
+if [ -z "$LOFAR_BUILD_NJOBS" ]; then
+    echo "*** Error: Please define the number of build processes to use (LOFAR_BUILD_NJOBS) ***"
+    exit 1
+fi
+
 #------------------------------------------------------------------------------
 #Where to store the stable packages
 LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
