@@ -35,7 +35,7 @@ ARCHIVE_LATEST_DIR_LINK=/opt/lofar-latest
 WCSLIB_ROOT_DIR=$STABLE_SOFT_DIR/builds/wcslib-4.8.2
 LOG4CPLUS_ROOT_DIR=$STABLE_SOFT_DIR/builds/log4cplus-1.0.4
 PYGSL_ROOT_DIR=$STABLE_SOFT_DIR/builds/pygsl-0.9.5
-PYSCOPG_ROOT_DIR=$STABLE_SOFT_DIR/builds/psycopg2-2.4.2
+PSYCOPG_ROOT_DIR=$STABLE_SOFT_DIR/builds/psycopg2-2.4.2
 
 #------------------------------------------------------------------------------
 PYRAP_SVNROOT=${SVN_GRP_DIR}/pyrap_checkout

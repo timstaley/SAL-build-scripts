@@ -51,7 +51,7 @@ ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/init-soft.sh ${STABLE_SOFT_DIR}
 ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/reset-paths.sh ${STABLE_SOFT_DIR}
 
 mkdir -p ${LOFAR_BUILDS_ARCHIVE_DIR}
-ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/set_lofar_env_paths.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
+ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/set_lofar_pipeline_env_paths.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
 ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/collate_lofar_symlinks.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
 
 ########################################################
