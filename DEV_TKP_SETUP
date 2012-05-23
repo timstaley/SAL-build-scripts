@@ -5,6 +5,8 @@
 
 TKP_DEV_ROOT=$HOME/code/tkp-dev
 
+DEV_INSTALL_TARGET=/opt/lofar-dev
+
 ####################################################################
 startdir=`pwd`
 BUILD_SCRIPTS_DIR=`dirname ${0}`
@@ -12,7 +14,8 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 source $BUILD_SCRIPTS_DIR/CONFIG
 source $BUILD_SCRIPTS_DIR/utils.sh
 
-cd $ARCHIVE_LATEST_DIR_LINK
+#cd $ARCHIVE_LATEST_DIR_LINK
+cd $DEV_INSTALL_TARGET
 TARGET=`pwd -P`
 
 SYMLINKS=$TARGET/symlinks
