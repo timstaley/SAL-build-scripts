@@ -11,7 +11,7 @@ check_result() {
     fi
 }
 
-update_source() {
+update_svn_source() {
     SOURCEDIR=${1}
     REVISION=${2}
     cd $SOURCEDIR
@@ -37,6 +37,23 @@ update_source() {
 			unset GIT_HASH
     fi
 }
+
+update_git_submodules_source() {
+    SOURCEDIR=${1}
+#    REVISION=${2}
+    cd $SOURCEDIR
+		echo 
+		echo
+    echo "*** Updating repo + submodules at $SOURCEDIR. ***"
+    git clean -df
+    check_result "$SOURCEDIR update" "clean" $?
+    git checkout -f master
+    git pull
+    check_result "$SOURCEDIR update" "git pull" $?
+    git submodule foreach git pull
+    check_result "$SOURCEDIR update" "submodule pull" $?
+}
+
 
 get_git_svnrev(){
 echo `git svn find-rev HEAD`

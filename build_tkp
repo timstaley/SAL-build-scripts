@@ -17,10 +17,15 @@ echo
 echo "**** Building TKP... **** "
 
 cd $TKP_SVNROOT
-SVN_REV=$(get_git_svnrev)
-GIT_HASH=$(get_git_short_hash)
-TKP_REV="${SVN_REV}_${GIT_HASH}"
-TKP_TARGET=$TARGET/tkp_r${TKP_REV}
+cd $TKP_SVNROOT/database
+DB_SHA=$(get_git_short_hash)
+cd $TKP_SVNROOT/tkp
+TKP_SHA=$(get_git_short_hash)
+cd $TKP_SVNROOT/trap
+TRAP_SHA=$(get_git_short_hash)
+cd $TKP_SVNROOTs
+
+TKP_TARGET=${TARGET}/tkp_db-${DB_SHA}_tkp-${TKP_SHA}_trap-${TRAP_SHA}
 
 echo "TKP target is $TKP_TARGET"
 
