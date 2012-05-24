@@ -46,10 +46,13 @@ update_git_submodules_source() {
 		echo
     echo "*** Updating repo + submodules at $SOURCEDIR. ***"
     git clean -df
+    git submodule foreach git clean -df
     check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
+    git submodule foreach git checkout -f master
+    check_result "$SOURCEDIR update" "checkout master" $?
     git pull
-    check_result "$SOURCEDIR update" "git pull" $?
+    check_result "$SOURCEDIR update" "super pull" $?
     git submodule foreach git pull
     check_result "$SOURCEDIR update" "submodule pull" $?
 }
