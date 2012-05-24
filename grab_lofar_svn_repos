@@ -17,7 +17,7 @@ check_result "lofar repo" "get" $?
 #-------------------------------------------------------------------------------
 echo "*** Checking out TKP ***"
 mkdir -p  $TKP_SVNROOT
-git svn clone  -r2700 http://ts@svn.transientskp.org/code/  $TKP_SVNROOT
+git clone --recursive git@github.com:transientskp/buildscripts.git  $TKP_SVNROOT
 check_result "tkp repo" "get" $?
 #-------------------------------------------------------------------------------
 echo "*** Checking out casacore ***"
