@@ -21,7 +21,7 @@ if [[ -n $update_repos ]]; then
 	update_svn_source $PYRAP_SVNROOT $PYRAP_REV
 	update_svn_source $LOFAR_SVNROOT $LOFAR_REV
 	update_git_submodules_source $TKP_SVNROOT #$TKP_REV
-	update_svn_source $LUS_SVNROOT $LUS_REV
+#	update_svn_source $LUS_SVNROOT $LUS_REV
 	bash $BUILD_SCRIPTS_DIR/apply_local_lofar_patches.sh
     check_result "Update sources" "Apply patches" $?
 	echo
