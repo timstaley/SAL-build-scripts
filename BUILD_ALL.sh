@@ -30,19 +30,19 @@ fi
 
 #------------------------------------------------------------------------------
 #Check ASKAP components have been pulled into the LOFAR source tree:
-echo "*** Inserting external ASKAPsoft dependencies. ***"
+#echo "*** Inserting external ASKAPsoft dependencies. ***"
 
-for path in Base/accessors/src \
-    Base/askap/src \
-    Base/mwcommon/src \
-    Base/scimath/src \
-    Components/Synthesis/synthesis/src
-do
-  rsync -tvvr --exclude=.svn \
-  $ASKAP_SRC_DIR/$path/ \
-  $LOFAR_SVNROOT/CEP/Imager/ASKAPsoft/$path
-	check_result "ASKAPSOFT" "rsync" $?
-done
+#for path in Base/accessors/src \
+#    Base/askap/src \
+#    Base/mwcommon/src \
+#    Base/scimath/src \
+#    Components/Synthesis/synthesis/src
+#do
+#  rsync -tvvr --exclude=.svn \
+#  $ASKAP_SRC_DIR/$path/ \
+#  $LOFAR_SVNROOT/CEP/Imager/ASKAPsoft/$path
+#	check_result "ASKAPSOFT" "rsync" $?
+#done
 
 #------------------------------------------------------------------------------
 #Setup
