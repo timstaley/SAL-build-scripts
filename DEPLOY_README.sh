@@ -12,7 +12,8 @@
 
 BUILD_SCRIPTS_DIR=`dirname ${0}`
 BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
-. $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
 
 ########################################################
 
@@ -31,13 +32,17 @@ BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
 
 ########################################################
-DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
+export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
 
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
+check_result "Grab libs" "log4cplus" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
+check_result "Grab libs" "wcslib" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
+check_result "Grab libs" "pygsl" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
-bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
+check_result "Grab libs" "psycopg" $?
+#bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
 
 ########################################################
 
@@ -54,7 +59,7 @@ ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/collate_lofar_symlinks.sh
 
 ########################################################
 ## Build!
-bash ${BUILD_SCRIPTS_DIR}/BUILD_ALL.sh
+#bash ${BUILD_SCRIPTS_DIR}/BUILD_ALL.sh
 ########################################################
 #Now set up your postgres database.
 # And install MonetDB (Currently favoured version: Dec2011)
