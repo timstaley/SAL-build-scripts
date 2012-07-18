@@ -8,6 +8,7 @@ echo "*** Grabbing and installing wcslib ***"
 mkdir -p ${LOFAR_DEPS_ROOT}/wcslib
 cd ${LOFAR_DEPS_ROOT}/wcslib
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
+  rm -rf *bz2*
   wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 .
   bunzip2 -f wcslib.tar.bz2 
 
