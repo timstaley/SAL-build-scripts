@@ -9,12 +9,11 @@ mkdir -p ${LOFAR_DEPS_ROOT}/wcslib
 cd ${LOFAR_DEPS_ROOT}/wcslib
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
   wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 .
-  bunzip2 wcslib.tar.bz2 
+  bunzip2 -f wcslib.tar.bz2 
 
 fi
-rm -rf wcslib-4.8.2
 tar xf wcslib.tar
-cd wcslib-4.8.2
+cd wcslib-4.14
 ./configure --prefix=$WCSLIB_ROOT_DIR
 make install
 
