@@ -51,7 +51,8 @@ LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout #will make build directory here.
 LOFAR_SVNROOT=$LOFAR_SRC_ROOT/LOFAR #Top dir of svn checkout Has to be "LOFAR" or the build will complain.
 
 TKP_SVNROOT=${SVN_GRP_DIR}/tkp-checkout
-TKP_CATALOGS=${SVN_GRP_DIR}/tkp-data/catalogs
+TKP_DATA=${SVN_GRP_DIR}/tkp-data
+TKP_CATALOGS=${TKP_DATA}/catalogs
 
 LUS_SVNROOT=${SVN_GRP_DIR}/LUS_repos/lofarsoft
 

@@ -42,5 +42,12 @@ mkdir -p $LUS_SVNROOT
 git svn clone -r 9750 http://usg.lofar.org/svn/code/trunk $LUS_SVNROOT
 check_result "LUS repo" "get" $?
 #-------------------------------------------------------------------------------
+#Leave this till last, we don't need it until after the build.
+echo "*** Checking out TKP-data ***"
+mkdir -p  $TKP_DATA
+git svn clone -r9   $TKP_DATA http://svn.transientskp.org/data
+check_result "tkp data repo" "get" $?
+#-------------------------------------------------------------------------------
+
 echo "*** LOFAR svn group repos checked out successfully *** "
 
