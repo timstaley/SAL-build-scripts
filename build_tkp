@@ -51,35 +51,12 @@ check_result "tkp" "install" $?
  
 ln -sfn $TKP_TARGET $SYMLINKS/tkp-root #for finding the TKP recipes directory
 
-#host=lofar1
-#echo "Setting up TKP test database"
-#mkdir -p database
-#rsync -a --exclude=".svn" ../database/trunk/database/pipeline_develop/MonetDB/ database
-#bash ./database/batches/setup.db.batch $host tkptest
-#mkdir -p tkpconfigdir
-#cat > tkpconfigdir/tkp.cfg <<EOF
-#[database]
-#enabled = True
-#host = $host
-#name = tkptest
-#user = tkptest
-#password = tkptest
-#engine = monetdb
-#autocommit = False
-#[test]
-#datapath = /home/ts3e11/code/tkp_data/post_build_testdata/data
-#EOF
-
-#export TKPCONFIGDIR=`pwd -P`"/tkpconfigdir"
-
-#echo "Copying files for in-build tests"
-#mkdir -p tkp/trunk/tests
-#rsync -a --exclude=".svn" ../tkp/trunk/tests/ tkp/trunk/tests
-#echo "\nRunning tests..."
-#ctest -VV --output-on-failure
-#unset TKPCONFIGDIR
-#monetdb stop tkptest
-#monetdb destroy -f tkptest
+#Symlink the catalogs into the installed folder, 
+#so you can easily run a database init:
+cd $SYMLINKS/tkp-root/database/catalog
+ln -sfn $TKP_CATALOGS/NVSS-all_strip.csv nvss/nvss.csv
+ln -sfn $TKP_CATALOGS/WENSS-all_strip.csv wenss/wenss.csv
+ln -sfn $TKP_CATALOGS/VLSS-all_strip.csv vlss/vlss.csv
 
 
 cd $startdir
