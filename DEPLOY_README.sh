@@ -23,6 +23,7 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 ########################################################
 # For successful unit testing, you will also need python-xmlrunner:
 # https://launchpad.net/ubuntu/+source/python-xmlrunner/1.2-1
+# (This is in the package list for 12.04)
 ########################################################
 
 ##Ok, install packages:
@@ -32,7 +33,7 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 
 
 ########################################################
-export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
+#export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
 
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
 check_result "Grab libs" "log4cplus" $?
@@ -42,7 +43,7 @@ bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
 check_result "Grab libs" "pygsl" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
 check_result "Grab libs" "psycopg" $?
-#bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
+bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
 
 ########################################################
 
