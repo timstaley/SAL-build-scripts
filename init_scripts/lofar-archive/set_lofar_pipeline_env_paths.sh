@@ -23,9 +23,9 @@ fi
 start_dir=`pwd`
 
 collated_paths_folder=$archive_target_dir/pathdirs
-export PATH=${collated_paths_folder}/bin${PATH:+:${PATH}} 
-export LD_LIBRARY_PATH=${collated_paths_folder}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} 
-export PYTHONPATH=${collated_paths_folder}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
+export PATH=${collated_paths_folder}/bin${PATH:+${PATH}:} 
+export LD_LIBRARY_PATH=${collated_paths_folder}/lib${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:} 
+export PYTHONPATH=${collated_paths_folder}/python-packages${PYTHONPATH:+${PYTHONPATH}:} 
 
 unset collated_paths_folder
 ################################################################

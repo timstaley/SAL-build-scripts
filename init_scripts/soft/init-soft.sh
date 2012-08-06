@@ -3,9 +3,9 @@
 
 stable_software_pathdirs=/opt/soft/pathdirs
 
-export PATH=${stable_software_pathdirs}/bin${PATH:+:${PATH}} 
-export LD_LIBRARY_PATH=${stable_software_pathdirs}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} 
-export PYTHONPATH=${stable_software_pathdirs}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
+export PATH=${stable_software_pathdirs}/bin${PATH:+${PATH}:} 
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}${stable_software_pathdirs}/lib 
+export PYTHONPATH=${stable_software_pathdirs}/python-packages${PYTHONPATH:+${PYTHONPATH}:} 
 
 #for s in PATH:bin LD_LIBRARY_PATH:lib \
 #	PYTHONPATH:python-packages; 
