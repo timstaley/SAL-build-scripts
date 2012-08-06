@@ -19,7 +19,7 @@ cd wcslib-4.14
 make install
 
 #create symlink so libpath gets picked up by the init script
-mkdir -p $STABLE_SOFT_DIR/symlinks/lib/wcslib
+mkdir -p $STABLE_SOFT_DIR/symlinks/lib
 ln -sfn $WCSLIB_ROOT_DIR/lib $STABLE_SOFT_DIR/symlinks/lib/wcslib
 
 cd $start_dir
