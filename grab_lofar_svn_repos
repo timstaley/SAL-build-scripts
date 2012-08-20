@@ -10,7 +10,7 @@
 
 echo "*** Checking out LOFAR ***"
 mkdir -p $LOFAR_SVNROOT 
-git svn clone -r20400 https://staley@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
+git svn clone -r21600 https://staley@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
 cd $LOFAR_SVNROOT
 git svn fetch #For some reason, (https?) extra step required here.
 check_result "lofar repo" "get" $?
@@ -45,7 +45,7 @@ check_result "LUS repo" "get" $?
 #Leave this till last, we don't need it until after the build.
 echo "*** Checking out TKP-data ***"
 mkdir -p  $TKP_DATA
-git svn clone -r9   $TKP_DATA http://svn.transientskp.org/data
+git svn clone -r9 http://svn.transientskp.org/data  $TKP_DATA
 check_result "tkp data repo" "get" $?
 #-------------------------------------------------------------------------------
 

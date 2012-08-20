@@ -27,3 +27,6 @@ python-pyfits
 python-tz					
 procmail					
 xvfb						
+python-xmlrunner
+python-nose
+python-dateutil
