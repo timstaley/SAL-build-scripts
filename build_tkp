@@ -16,28 +16,33 @@ echo "Installing into $TARGET"
 echo 
 echo "**** Building TKP... **** "
 
+
+#Create the target folder - we will install both TKP libs and trap recipes here:
 cd $TKP_SVNROOT
-cd $TKP_SVNROOT/database
-DB_SHA=$(get_git_short_hash)
+#cd $TKP_SVNROOT/database #Database code merged into tkp
+#DB_SHA=$(get_git_short_hash)
 cd $TKP_SVNROOT/tkp
 TKP_SHA=$(get_git_short_hash)
 cd $TKP_SVNROOT/trap
 TRAP_SHA=$(get_git_short_hash)
 cd $TKP_SVNROOTs
 
-TKP_TARGET=${TARGET}/tkp_db-${DB_SHA}_tkp-${TKP_SHA}_trap-${TRAP_SHA}
+TKP_TARGET=${TARGET}/tkp_${TKP_SHA}_trap-${TRAP_SHA}
 
 echo "TKP target is $TKP_TARGET"
 
 ln -sfn ${TKP_TARGET}/lib ${SYMLINKS}/lib/tkp
-ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/tkp
+ln -sfn ${TKP_TARGET}/lib/python/tkp ${SYMLINKS}/python-packages/tkp
 ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
 
-rm -rf $TKP_SVNROOT/build 
-mkdir $TKP_SVNROOT/build
-cd $TKP_SVNROOT/build
+#----------------------------------------------------------------------------
+#Build and install TKP libs
 
-cmake_command="cmake $TKP_SVNROOT -DCMAKE_INSTALL_PREFIX=${TKP_TARGET} 
+rm -rf $TKP_SVNROOT/tkp/build 
+mkdir $TKP_SVNROOT/tkp/build
+cd $TKP_SVNROOT/tkp/build
+
+cmake_command="cmake $TKP_SVNROOT/tkp -DCMAKE_INSTALL_PREFIX=${TKP_TARGET} 
 		-DTKP_DEVELOP=1 
 		-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR"
 echo $cmake_command > cmake_command.sh
@@ -49,7 +54,7 @@ check_result "tkp" "build" $?
 make install
 check_result "tkp" "install" $?
  
-ln -sfn $TKP_TARGET $SYMLINKS/tkp-root #for finding the TKP recipes directory
+ln -sfnv $TKP_TARGET $SYMLINKS/tkp-root #for finding the TKP recipes directory
 
 #Symlink the catalogs into the installed folder, 
 #so you can easily run a database init:
@@ -57,7 +62,17 @@ cd $SYMLINKS/tkp-root/database/catalog
 ln -sfn $TKP_CATALOGS/NVSS-all_strip.csv nvss/nvss.csv
 ln -sfn $TKP_CATALOGS/WENSS-all_strip.csv wenss/wenss.csv
 ln -sfn $TKP_CATALOGS/VLSS-all_strip.csv vlss/vlss.csv
-
-
+cd $startdir
+#----------------------------------------------------------------------------
+#Install trap recipes
+rm -rf $TKP_SVNROOT/trap/build 
+mkdir $TKP_SVNROOT/trap/build
+cd $TKP_SVNROOT/trap/build
+cmake_command="cmake $TKP_SVNROOT/trap -DCMAKE_INSTALL_PREFIX=${TKP_TARGET}"
+echo $cmake_command > cmake_command.sh
+bash cmake_command.sh
+check_result "trap" "cmake" $?
+make install
+check_result "trap" "install" $?
 cd $startdir
 
