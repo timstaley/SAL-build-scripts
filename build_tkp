@@ -32,7 +32,7 @@ TKP_TARGET=${TARGET}/tkp_${TKP_SHA}_trap-${TRAP_SHA}
 echo "TKP target is $TKP_TARGET"
 
 ln -sfn ${TKP_TARGET}/lib ${SYMLINKS}/lib/tkp
-ln -sfn ${TKP_TARGET}/lib/python/tkp ${SYMLINKS}/python-packages/tkp
+ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages
 ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
 
 #----------------------------------------------------------------------------
@@ -75,4 +75,8 @@ check_result "trap" "cmake" $?
 make install
 check_result "trap" "install" $?
 cd $startdir
+
+#Symlink the recipes folder to where it was install previously, 
+#so as not to upset all the user-config files:
+ln -sfnv $SYMLINKS/tkp-root/lib/python/trap/recipes $SYMLINKS/tkp-root/recipes
 
