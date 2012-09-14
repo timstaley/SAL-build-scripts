@@ -16,12 +16,13 @@ update_repos="true"
 #LOFAR_REV=20986
 #CASACORE_REV=21227
 if [[ -n $update_repos ]]; then
-	update_svn_source $CASACORE_SVNROOT $CASACORE_REV
-	update_svn_source $CASAREST_SVNROOT $CASAREST_REV
-	update_svn_source $PYRAP_SVNROOT $PYRAP_REV
-	update_svn_source $LOFAR_SVNROOT $LOFAR_REV
-	update_git_submodules_source $TKP_SVNROOT #$TKP_REV
-#	update_svn_source $LUS_SVNROOT $LUS_REV
+	update_svn_repo $CASACORE_SVNROOT $CASACORE_REV
+	update_svn_repo $CASAREST_SVNROOT $CASAREST_REV
+	update_svn_repo $PYRAP_SVNROOT $PYRAP_REV
+	update_svn_repo $LOFAR_SVNROOT $LOFAR_REV
+	update_git_repo $TKP_SVNROOT/tkp 
+    update_git_repo $TKP_SVNROOT/trap
+#	update_svn_repo $LUS_SVNROOT $LUS_REV
 	bash $BUILD_SCRIPTS_DIR/apply_local_lofar_patches.sh
     check_result "Update sources" "Apply patches" $?
 	echo
