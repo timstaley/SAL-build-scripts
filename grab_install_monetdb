@@ -22,7 +22,9 @@ make install
 #create symlinks
 mkdir -p $STABLE_SOFT_DIR/symlinks/bin
 mkdir -p $STABLE_SOFT_DIR/symlinks/lib
-mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages
+
+## NB Don't use the packaged version of monetdb (as of 12-09-14). Use pip to install the latest `python-monetdb' package from pypi.
+#mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages 
 
 ln -sfn $TARGET/bin $STABLE_SOFT_DIR/symlinks/bin/monetdb
 ln -sfn $TARGET/lib $STABLE_SOFT_DIR/symlinks/lib/monetdb
