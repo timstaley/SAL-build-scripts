@@ -74,13 +74,13 @@ END
 
 #------------------------------------------------------------------------------
 #Create pulsar tools init file
-echo "Generating init-pulsar.sh."
-INITFILE=$TARGET/init-pulsar.sh
-cat > $INITFILE <<-END
-archive_target_dir=$TARGET
-source $LOFAR_BUILDS_ARCHIVE_DIR/set_lus_pulsar_env_paths.sh
-unset archive_target_dir #because we need to "source" this file.
-END
+#echo "Generating init-pulsar.sh."
+#INITFILE=$TARGET/init-pulsar.sh
+#cat > $INITFILE <<-END
+#archive_target_dir=$TARGET
+#source $LOFAR_BUILDS_ARCHIVE_DIR/set_lus_pulsar_env_paths.sh
+#unset archive_target_dir #because we need to "source" this file.
+#END
 
 #------------------------------------------------------------------------------
 #Create path collation file, in case the build doesn't complete and we run it manually:
