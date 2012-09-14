@@ -11,7 +11,7 @@ check_result() {
     fi
 }
 
-update_svn_source() {
+update_svn_repo() {
     SOURCEDIR=${1}
     REVISION=${2}
     cd $SOURCEDIR
@@ -38,23 +38,19 @@ update_svn_source() {
     fi
 }
 
-update_git_submodules_source() {
+update_git_repo() {
     SOURCEDIR=${1}
 #    REVISION=${2}
     cd $SOURCEDIR
 		echo 
 		echo
-    echo "*** Updating repo + submodules at $SOURCEDIR. ***"
+    echo "*** Updating repo at $SOURCEDIR. ***"
     git clean -df
-    git submodule foreach git clean -df
     check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
-    git submodule foreach git checkout -f master
     check_result "$SOURCEDIR update" "checkout master" $?
     git pull
-    check_result "$SOURCEDIR update" "super pull" $?
-    git submodule foreach git pull
-    check_result "$SOURCEDIR update" "submodule pull" $?
+    check_result "$SOURCEDIR update" "pull" $?
 }
 
 
