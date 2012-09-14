@@ -32,7 +32,7 @@ TKP_TARGET=${TARGET}/tkp_${TKP_SHA}_trap-${TRAP_SHA}
 echo "TKP target is $TKP_TARGET"
 
 ln -sfn ${TKP_TARGET}/lib ${SYMLINKS}/lib/tkp
-ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages
+ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/tkp
 ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
 
 #----------------------------------------------------------------------------
@@ -44,7 +44,8 @@ cd $TKP_SVNROOT/tkp/build
 
 cmake_command="cmake $TKP_SVNROOT/tkp -DCMAKE_INSTALL_PREFIX=${TKP_TARGET} 
 		-DTKP_DEVELOP=1 
-		-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR"
+		-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR
+		-DPYTHON_PACKAGES_DIR=${TKP_TARGET}/lib/python"
 echo $cmake_command > cmake_command.sh
 bash cmake_command.sh
 check_result "tkp" "cmake" $?
@@ -68,7 +69,9 @@ cd $startdir
 rm -rf $TKP_SVNROOT/trap/build 
 mkdir $TKP_SVNROOT/trap/build
 cd $TKP_SVNROOT/trap/build
-cmake_command="cmake $TKP_SVNROOT/trap -DCMAKE_INSTALL_PREFIX=${TKP_TARGET}"
+cmake_command="cmake $TKP_SVNROOT/trap 
+		-DCMAKE_INSTALL_PREFIX=${TKP_TARGET}
+		-DPYTHON_PACKAGES_DIR=${TKP_TARGET}/lib/python"
 echo $cmake_command > cmake_command.sh
 bash cmake_command.sh
 check_result "trap" "cmake" $?
