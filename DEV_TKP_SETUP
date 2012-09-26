@@ -28,7 +28,7 @@ ln -s ${TKP_DEV_ROOT}/tkp/tkp tkp
 
 cd $SYMLINKS/tkp-root
 mv recipes recipes-backup
-ln -s ${TKP_DEV_ROOT}/trap/recipes recipes
+ln -s ${TKP_DEV_ROOT}/trap/trap/recipes recipes
 
 
 cd $startdir
