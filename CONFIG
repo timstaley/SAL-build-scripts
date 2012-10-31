@@ -3,14 +3,20 @@
 BUILD_SCRIPTS_DIR=`dirname ${0}`
 BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
-source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #LOFAR_BUILD_NJOBS=???
-
+source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #defines LOFAR_BUILD_NJOBS and LOFAR_SVN_LOGIN
 if [ -z "$LOFAR_BUILD_NJOBS" ]; then
     echo "*** Error: Please define the number of build processes to use (LOFAR_BUILD_NJOBS) ***"
     exit 1
 fi
 
+if [ -z "$LOFAR_SVN_LOGIN" ]; then
+    echo "*** Error: Please define your username for svn.astron.nl (LOFAR_SVN_LOGIN) ***"
+    exit 1
+fi
+
 #------------------------------------------------------------------------------
+## Resource dirs:
+
 #Where to store the stable packages
 LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
 
