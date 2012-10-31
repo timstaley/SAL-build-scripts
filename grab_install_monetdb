@@ -19,7 +19,7 @@ fi
 cd MonetDB-${MDB_VER}
 TARGET=$STABLE_SOFT_DIR/builds/monetdb-${MDB_VER}
 ./configure --prefix=$TARGET
-make install
+make install -j$LOFAR_BUILD_NJOBS
 
 #create symlinks
 mkdir -p $STABLE_SOFT_DIR/symlinks/bin
