@@ -17,14 +17,14 @@ fi
 #------------------------------------------------------------------------------
 ## Resource dirs:
 
-#Where to store the stable packages
-LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
-
 #Where to checkout the development repositories
 SVN_GRP_DIR=/opt/repos
 
+#Where to store the stable packages
+LOFAR_DEPS_ROOT=/opt/repos/lofar_deps
+
 #Where to find the ASKAP sources to pull into the LOFAR tree
-ASKAP_SRC_DIR=~/code/ASKAPsoft
+#ASKAP_SRC_DIR=~/code/ASKAPsoft
 
 #Where to find local Lofar patches:
 PATCHES_GRP_DIR=$BUILD_SCRIPTS_DIR
