@@ -15,7 +15,9 @@ if [ -z "$LOFAR_SVN_LOGIN" ]; then
 fi
 
 #------------------------------------------------------------------------------
-## Resource dirs:
+## Resources:
+
+export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files. Comment out if you already have them.
 
 #Where to checkout the development repositories
 SVN_GRP_DIR=/opt/repos

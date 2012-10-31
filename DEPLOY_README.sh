@@ -33,7 +33,6 @@ sudo apt-get install  $(< LOFAR_package_list_Ubuntu_12.04)
 
 
 ########################################################
-export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files
 
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
 check_result "Grab libs" "log4cplus" $?
