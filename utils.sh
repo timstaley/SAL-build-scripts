@@ -14,6 +14,7 @@ check_result() {
 update_svn_repo() {
     SOURCEDIR=${1}
     REVISION=${2}
+    SVN_LOGIN=${3}
     cd $SOURCEDIR
 		echo 
 		echo
@@ -21,7 +22,11 @@ update_svn_repo() {
     git clean -df
     check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
-    git svn rebase
+	if [ $SVN_LOGIN ];    then
+		git svn rebase --username $SVN_LOGIN
+	else
+		git svn rebase
+	fi
     check_result "$SOURCEDIR update" "svn rebase" $?
     if [ $REVISION ];    then
     	echo "*** Checking out r$REVISION. *** "
