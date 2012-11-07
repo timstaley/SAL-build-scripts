@@ -30,3 +30,4 @@ xvfb
 python-xmlrunner
 python-nose
 python-dateutil
+python-h5py
