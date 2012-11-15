@@ -31,3 +31,4 @@ python-xmlrunner
 python-nose
 python-dateutil
 python-h5py
+libatlas3gf-base
