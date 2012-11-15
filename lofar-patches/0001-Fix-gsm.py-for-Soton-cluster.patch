@@ -1,0 +1,47 @@
+From 61b503cfc34b35c4407a3dc2dd7e48f3a7e0ee05 Mon Sep 17 00:00:00 2001
+From: Tim Staley <tim.staley@soton.ac.uk>
+Date: Thu, 15 Nov 2012 16:39:51 +0000
+Subject: [PATCH] Fix gsm.py for Soton cluster
+
+---
+ CEP/GSM/db/batches/setup.db.Dec2011.batch |    2 +-
+ CEP/GSM/src/gsm.py                        |    7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/CEP/GSM/db/batches/setup.db.Dec2011.batch b/CEP/GSM/db/batches/setup.db.Dec2011.batch
+index f44efb1..d8b3dc4 100755
+--- a/CEP/GSM/db/batches/setup.db.Dec2011.batch
++++ b/CEP/GSM/db/batches/setup.db.Dec2011.batch
+@@ -22,7 +22,7 @@
+ # %> ./setup.db.batch localhost test1 test1 test1 50000                       #
+ ###############################################################################
+ 
+-MONETDBSIPHOME=/home/amints/prog/LOFAR_trunk/CEP/GSM/db
++MONETDBSIPHOME=/opt/repos/lofar_checkout/LOFAR/CEP/GSM/db
+ 
+ if [ -z "$*" ]
+ then
+diff --git a/CEP/GSM/src/gsm.py b/CEP/GSM/src/gsm.py
+index ece32aa..1c82446 100755
+--- a/CEP/GSM/src/gsm.py
++++ b/CEP/GSM/src/gsm.py
+@@ -41,13 +41,12 @@ def gsmMain (name, argv):
+     if len(argv) > 5:
+         theta = float(argv[5])
+ 
+-    db_host = "ldb002"
++    db_host = "lofar1"
+     #db_host = "napels"
+     db_dbase = "gsm"
+     db_user = "gsm"
+-    db_passwd = "msss"
+-    #db_passwd = "gsm"
+-    db_port = 51000
++    db_passwd = "gsm"
++    db_port = 50000
+     db_autocommit = True
+ 
+     try:
+-- 
+1.7.0.4
+
