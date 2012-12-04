@@ -1,0 +1,121 @@
+From bb469696d6018c21446b3f005de29baafd11515e Mon Sep 17 00:00:00 2001
+From: Tim Staley <tim.staley@soton.ac.uk>
+Date: Fri, 16 Nov 2012 14:29:16 +0000
+Subject: [PATCH] Fix gsm.py and GSM install script for Soton cluster.
+
+---
+ CEP/GSM/db/batches/setup.db.Dec2011.batch |   12 ++++++------
+ CEP/GSM/db/load/load.cat.nvss.sql         |    4 ++--
+ CEP/GSM/db/load/load.cat.vlss.sql         |    4 ++--
+ CEP/GSM/db/load/load.cat.wenss.sql        |    4 ++--
+ CEP/GSM/src/gsm.py                        |    7 +++----
+ 5 files changed, 15 insertions(+), 16 deletions(-)
+
+diff --git a/CEP/GSM/db/batches/setup.db.Dec2011.batch b/CEP/GSM/db/batches/setup.db.Dec2011.batch
+index f44efb1..9d817c6 100755
+--- a/CEP/GSM/db/batches/setup.db.Dec2011.batch
++++ b/CEP/GSM/db/batches/setup.db.Dec2011.batch
+@@ -22,7 +22,7 @@
+ # %> ./setup.db.batch localhost test1 test1 test1 50000                       #
+ ###############################################################################
+ 
+-MONETDBSIPHOME=/home/amints/prog/LOFAR_trunk/CEP/GSM/db
++MONETDBSIPHOME=/opt/repos/lofar_checkout/LOFAR/CEP/GSM/db
+ 
+ if [ -z "$*" ]
+ then
+@@ -297,20 +297,20 @@ echo -e "\tLoading catalogs into MonetDB ${dbname}"
+ echo -e "\t----------------------------------------------"
+ 
+ echo -e "\t\tLoad NVSS catalog"
+-#time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.nvss.sql || exit 1
++time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.nvss.sql || exit 1
+ 
+ echo -e "\t\tLoad VLSS catalog"
+-#time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.vlss.sql || exit 1
++time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.vlss.sql || exit 1
+ 
+ echo -e "\t\tLoad WENSS catalog"
+-#time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.wenss.sql || exit 1 
++time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.wenss.sql || exit 1 
+ 
+ #echo -e "\t\tLoad EXOplanets catalog"
+ #time mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.exo.sql || exit 1
+ 
+-echo -e "\t\tLoad GRB catalog"
++#echo -e "\t\tLoad GRB catalog"
+ #mclient -p$port -lsql -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.grb.sql || exit 1
+-date '+%Y-%m-%d-%H:%M:%S'
++#date '+%Y-%m-%d-%H:%M:%S'
+ 
+ #echo -e "\t\tLoad SIMDATA catalog"
+ #mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.simdata.sql || exit 1
+diff --git a/CEP/GSM/db/load/load.cat.nvss.sql b/CEP/GSM/db/load/load.cat.nvss.sql
+index 61cd8d0..655c791 100644
+--- a/CEP/GSM/db/load/load.cat.nvss.sql
++++ b/CEP/GSM/db/load/load.cat.nvss.sql
+@@ -57,8 +57,8 @@ CREATE TABLE aux_catalogedsources
+ COPY 1773484 RECORDS
+ INTO aux_catalogedsources
+ FROM
+-/* Uncomment here the absolute server path to the csv catalogue file  
+- '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
++-- Uncomment here the absolute server path to the csv catalogue file  
++ '/opt/repos/tkp-data/catalogs/NVSS-all_strip.csv'
+ USING DELIMITERS ';', '\n'
+ NULL AS ''
+ ;
+diff --git a/CEP/GSM/db/load/load.cat.vlss.sql b/CEP/GSM/db/load/load.cat.vlss.sql
+index 0c05d21..1c7faa8 100644
+--- a/CEP/GSM/db/load/load.cat.vlss.sql
++++ b/CEP/GSM/db/load/load.cat.vlss.sql
+@@ -48,8 +48,8 @@ CREATE TABLE aux_catalogedsources
+ COPY 68311 RECORDS
+ INTO aux_catalogedsources
+ FROM
+-/* Uncomment here the absolute server path to the csv catalogue file  
+- '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
++-- Uncomment here the absolute server path to the csv catalogue file  
++ '/opt/repos/tkp-data/catalogs/VLSS-all_strip.csv'
+ USING DELIMITERS ';', '\n'
+ NULL AS ''
+ ;
+diff --git a/CEP/GSM/db/load/load.cat.wenss.sql b/CEP/GSM/db/load/load.cat.wenss.sql
+index c61cee3..3c56027 100644
+--- a/CEP/GSM/db/load/load.cat.wenss.sql
++++ b/CEP/GSM/db/load/load.cat.wenss.sql
+@@ -82,8 +82,8 @@ CREATE TABLE aux_catalogedsources
+ COPY 229420 RECORDS 
+ INTO aux_catalogedsources 
+ FROM
+-/* Uncomment here the absolute server path to the csv catalogue file  
+- '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
++-- Uncomment here the absolute server path to the csv catalogue file  
++ '/opt/repos/tkp-data/catalogs/WENSS-all_strip.csv'
+ USING DELIMITERS ';', '\n' 
+ ;
+ 
+diff --git a/CEP/GSM/src/gsm.py b/CEP/GSM/src/gsm.py
+index ece32aa..1c82446 100755
+--- a/CEP/GSM/src/gsm.py
++++ b/CEP/GSM/src/gsm.py
+@@ -41,13 +41,12 @@ def gsmMain (name, argv):
+     if len(argv) > 5:
+         theta = float(argv[5])
+ 
+-    db_host = "ldb002"
++    db_host = "lofar1"
+     #db_host = "napels"
+     db_dbase = "gsm"
+     db_user = "gsm"
+-    db_passwd = "msss"
+-    #db_passwd = "gsm"
+-    db_port = 51000
++    db_passwd = "gsm"
++    db_port = 50000
+     db_autocommit = True
+ 
+     try:
+-- 
+1.7.5.4
+

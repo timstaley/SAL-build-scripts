@@ -3,22 +3,30 @@
 BUILD_SCRIPTS_DIR=`dirname ${0}`
 BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
 
-source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #LOFAR_BUILD_NJOBS=???
-
+source $BUILD_SCRIPTS_DIR/CONFIG_LOCAL #defines LOFAR_BUILD_NJOBS and LOFAR_SVN_LOGIN
 if [ -z "$LOFAR_BUILD_NJOBS" ]; then
     echo "*** Error: Please define the number of build processes to use (LOFAR_BUILD_NJOBS) ***"
     exit 1
 fi
 
+if [ -z "$LOFAR_SVN_LOGIN" ]; then
+    echo "*** Error: Please define your username for svn.astron.nl (LOFAR_SVN_LOGIN) ***"
+    exit 1
+fi
+
 #------------------------------------------------------------------------------
-#Where to store the stable packages
-LOFAR_DEPS_ROOT=~/software_installers/lofar_dependencies
+## Resources:
+
+export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files. Comment out if you already have them.
 
 #Where to checkout the development repositories
 SVN_GRP_DIR=/opt/repos
 
+#Where to store the stable packages
+LOFAR_DEPS_ROOT=/opt/repos/lofar_deps
+
 #Where to find the ASKAP sources to pull into the LOFAR tree
-ASKAP_SRC_DIR=~/code/ASKAPsoft
+#ASKAP_SRC_DIR=~/code/ASKAPsoft
 
 #Where to find local Lofar patches:
 PATCHES_GRP_DIR=$BUILD_SCRIPTS_DIR

@@ -33,6 +33,7 @@ echo "TKP target is $TKP_TARGET"
 
 ln -sfn ${TKP_TARGET}/lib ${SYMLINKS}/lib/tkp
 ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/tkp
+ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/trap
 ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
 
 #----------------------------------------------------------------------------

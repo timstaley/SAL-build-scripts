@@ -10,15 +10,17 @@
 
 echo "*** Checking out LOFAR ***"
 mkdir -p $LOFAR_SVNROOT 
-git svn clone -r21600 https://staley@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
+git svn clone --username $LOFAR_SVN_LOGIN -r22500 https://@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
 cd $LOFAR_SVNROOT
 git svn fetch #For some reason, (https?) extra step required here.
 check_result "lofar repo" "get" $?
 #-------------------------------------------------------------------------------
-echo "*** Checking out TKP ***"
+echo "*** Checking out TKP repos ***"
 mkdir -p  $TKP_SVNROOT
-git clone --recursive git@github.com:transientskp/buildscripts.git  $TKP_SVNROOT
+git clone git@github.com:transientskp/tkp.git  $TKP_SVNROOT/tkp
 check_result "tkp repo" "get" $?
+git clone git@github.com:transientskp/trap.git  $TKP_SVNROOT/trap
+check_result "trap repo" "get" $?
 #-------------------------------------------------------------------------------
 echo "*** Checking out casacore ***"
 mkdir -p  $CASACORE_SVNROOT 
