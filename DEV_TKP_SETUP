@@ -31,6 +31,8 @@ ln -s ${TKP_DEV_ROOT}/trap/trap trap
 cd $SYMLINKS/tkp-root
 mv recipes recipes-backup
 ln -s ${TKP_DEV_ROOT}/trap/trap/recipes recipes
+mv bin bin-backup
+ln -s ${TKP_DEV_ROOT}/trap/trap/bin bin
 
 
 cd $startdir
