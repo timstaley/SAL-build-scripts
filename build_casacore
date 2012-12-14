@@ -23,7 +23,8 @@ CASACORE_TARGET=$TARGET/casacore_r${CASACORE_REV}
 
 ln -sfn $CASACORE_TARGET $SYMLINKS/casacore-root
 
-scons -j $LOFAR_BUILD_NJOBS --prefix=$CASACORE_TARGET --enable-shared --disable-static --wcs-root=$WCSLIB_ROOT_DIR install
+scons -j $LOFAR_BUILD_NJOBS --prefix=$CASACORE_TARGET  --enable-shared --disable-static  --wcs-root=$WCSLIB_ROOT_DIR   --data-dir=$CASA_MEASURES/data install
+
 check_result "casacore" "scons" $?
 
 #Copy in the measures data:

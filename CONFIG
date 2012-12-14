@@ -53,6 +53,7 @@ PSYCOPG_ROOT_DIR=$STABLE_SOFT_DIR/builds/psycopg2-2.4.2
 #------------------------------------------------------------------------------
 PYRAP_SVNROOT=${SVN_GRP_DIR}/pyrap_checkout
 CASACORE_SVNROOT=${SVN_GRP_DIR}/casacore_checkout/casacore
+CASA_MEASURES=$SVN_GRP_DIR/casa_measures
 CASAREST_SVNROOT=${SVN_GRP_DIR}/casarest_checkout
 
 LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout #will make build directory here.
