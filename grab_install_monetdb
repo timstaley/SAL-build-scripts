@@ -24,16 +24,19 @@ cd MonetDB-${MDB_VER}
 TARGET=$STABLE_SOFT_DIR/builds/monetdb-${MDB_VER}
 ./configure --prefix=$TARGET
 make install -j$LOFAR_BUILD_NJOBS
+check_result "Install Monetdb" "make install" $?
 
 #create symlinks
+MONETDB_TOP_LINK=$STABLE_SOFT_DIR/builds/monetdb-active
+ln -sfn $TARGET $MONETDB_TOP_LINK
 mkdir -p $STABLE_SOFT_DIR/symlinks/bin
 mkdir -p $STABLE_SOFT_DIR/symlinks/lib
 mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages 
 
 
-ln -sfn $TARGET/bin $STABLE_SOFT_DIR/symlinks/bin/monetdb
-ln -sfn $TARGET/lib $STABLE_SOFT_DIR/symlinks/lib/monetdb
-ln -sfn $TARGET/lib/python${LOFAR_PYTHON_VERSION}/site-packages \
+ln -sfn $MONETDB_TOP_LINK/bin $STABLE_SOFT_DIR/symlinks/bin/monetdb
+ln -sfn $MONETDB_TOP_LINK/lib $STABLE_SOFT_DIR/symlinks/lib/monetdb
+ln -sfn $MONETDB_TOP_LINK/lib/python${LOFAR_PYTHON_VERSION}/site-packages \
 	$STABLE_SOFT_DIR/symlinks/python-packages/monetdb
 
 cd $start_dir
