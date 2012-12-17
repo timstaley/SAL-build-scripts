@@ -5,16 +5,16 @@ echo "*** Grabbing and installing psycopg ***"
 #Pull in general lofar build config:
 . `dirname ${0}`/CONFIG
 
+PSYCO_VER=2.4.6
 
 mkdir -p ${LOFAR_DEPS_ROOT}/psycopg
 cd ${LOFAR_DEPS_ROOT}/psycopg
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
-  wget http://initd.org/psycopg/tarballs/PSYCOPG-2-4/psycopg2-2.4.2.tar.gz .
-  gunzip psycopg2-2.4.2.tar.gz
+  wget http://initd.org/psycopg/tarballs/PSYCOPG-2-4/psycopg2-$PSYCO_VER.tar.gz .
 fi
-rm -rf psycopg2-2.4.2
-tar xf psycopg2-2.4.2.tar
-cd psycopg2-2.4.2
+rm -rf psycopg2-$PSYCO_VER
+tar zxf psycopg2-$PSYCO_VER.tar.gz
+cd psycopg2-$PSYCO_VER
 python setup.py install --prefix=$PSYCOPG_ROOT_DIR
 
 #symlinks
