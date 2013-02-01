@@ -1,7 +1,7 @@
 #!/bin/bash
 #Setup the various environment paths:
 
-stable_software_pathdirs=/opt/soft/pathdirs
+stable_software_pathdirs=/opt/share/soft/pathdirs
 
 export PATH=${PATH:+${PATH}:}${stable_software_pathdirs}/bin 
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}${stable_software_pathdirs}/lib 

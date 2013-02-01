@@ -1,7 +1,7 @@
 #!/bin/bash
 #Setup the various environment paths:
 
-stable_software_path=/opt/soft
+stable_software_path=/opt/share/soft
 collated_paths_folder=$stable_software_path/symlinks/archive/`date +%F-%H-%M`
 
 #rm -rf $collated_paths_folder
