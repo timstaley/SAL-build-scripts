@@ -20,10 +20,10 @@ fi
 export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files. Comment out if you already have them.
 
 #Where to checkout the development repositories
-SVN_GRP_DIR=/opt/repos
+SVN_GRP_DIR=/opt/share/repos
 
 #Where to store the stable packages
-LOFAR_DEPS_ROOT=/opt/repos/lofar_deps
+LOFAR_DEPS_ROOT=$SVN_GRP_DIR/lofar_deps
 
 #Where to find the ASKAP sources to pull into the LOFAR tree
 #ASKAP_SRC_DIR=~/code/ASKAPsoft
@@ -35,13 +35,13 @@ PATCHES_GRP_DIR=$BUILD_SCRIPTS_DIR
 ## Install dirs:
 
 # Stable software parent dir:
-STABLE_SOFT_DIR=/opt/soft
+STABLE_SOFT_DIR=/opt/share/soft
 
 # Lofar Builds parent dir:
-LOFAR_BUILDS_ARCHIVE_DIR=/opt/lofar-archive
+LOFAR_BUILDS_ARCHIVE_DIR=/opt/share/lofar-archive
 
 #Most recent build target dir symlink:
-ARCHIVE_LATEST_DIR_LINK=/opt/lofar-latest
+ARCHIVE_LATEST_DIR_LINK=/opt/share/lofar-latest
 
 #------------------------------------------------------------------------------
 # Stable subdirs:
@@ -53,6 +53,7 @@ PSYCOPG_ROOT_DIR=$STABLE_SOFT_DIR/builds/psycopg2-2.4.2
 #------------------------------------------------------------------------------
 PYRAP_SVNROOT=${SVN_GRP_DIR}/pyrap_checkout
 CASACORE_SVNROOT=${SVN_GRP_DIR}/casacore_checkout/casacore
+CASA_MEASURES=$SVN_GRP_DIR/casa_measures
 CASAREST_SVNROOT=${SVN_GRP_DIR}/casarest_checkout
 
 LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout #will make build directory here.

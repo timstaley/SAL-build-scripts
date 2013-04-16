@@ -26,6 +26,11 @@ echo "*** Checking out casacore ***"
 mkdir -p  $CASACORE_SVNROOT 
 git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
 check_result "casacore repo" "get" $?
+#Casacore needs latest 'measures' data for accurate co-ord conversions:
+mkdir -p cd $CASA_MEASURES
+cd $CASA_MEASURES
+wget ftp://ftp.atnf.csiro.au/pub/software/measures_data/measures_data.tar.bz2
+tar xvjf measures_data.tar.bz2
 
 echo "*** Checking out pyrap ***"
 mkdir -p $PYRAP_SVNROOT

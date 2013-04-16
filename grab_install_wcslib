@@ -5,18 +5,20 @@ echo "*** Grabbing and installing wcslib ***"
 #Pull in general lofar build config:
 . `dirname ${0}`/CONFIG
 
+WCSLIB_VERSION=4.16
+
 mkdir -p ${LOFAR_DEPS_ROOT}/wcslib
 cd ${LOFAR_DEPS_ROOT}/wcslib
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
   rm -rf *bz2*
-  wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib-4.15.tar.bz2 .
-  bunzip2 -f wcslib-4.15.tar.bz2 
+  wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib-$WCSLIB_VERSION.tar.bz2
+  bunzip2 -f wcslib-$WCSLIB_VERSION.tar.bz2 
 
 fi
-tar xf wcslib.tar
-cd wcslib-4.15
+tar xf wcslib-$WCSLIB_VERSION.tar
+cd wcslib-$WCSLIB_VERSION
 ./configure --prefix=$WCSLIB_ROOT_DIR
-make install
+make install -j$LOFAR_BUILD_NJOBS
 
 #create symlink so libpath gets picked up by the init script
 mkdir -p $STABLE_SOFT_DIR/symlinks/lib

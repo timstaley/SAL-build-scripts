@@ -4,32 +4,43 @@ start_dir=`pwd`
 echo "*** Grabbing and installing monetdb ***"
 #Pull in general lofar build config:
 . `dirname ${0}`/CONFIG
+. `dirname ${0}`/utils.sh
 
-MDB_VER=11.13.3
+#MDB_VER=11.13.5
+#MDB_URL=http://dev.monetdb.org/downloads/sources/Oct2012-SP1/MonetDB-11.13.5.tar.bz2
+#MDB_VER=11.13.9
+#MDB_URL=http://dev.monetdb.org/downloads/sources/Oct2012-SP3/MonetDB-${MDB_VER}.tar.bz2
+MDB_VER=11.15.1
+MDB_URL=http://dev.monetdb.org/downloads/sources/Feb2013/MonetDB-${MDB_VER}.tar.bz2
+
+TARGET=$STABLE_SOFT_DIR/builds/monetdb-${MDB_VER}
 
 mkdir -p ${LOFAR_DEPS_ROOT}/monetdb
 cd ${LOFAR_DEPS_ROOT}/monetdb
 if [[ -n $DOWNLOAD_LOFAR_DEPS ]]; then
-	echo "*** Downloading monetdb... ***"
+	echo "*** Downloading monetdb from:"
+    echo $MDB_URL
+    echo "***"
   rm -rf *bz2*
-  wget http://dev.monetdb.org/downloads/sources/Oct2012/MonetDB-${MDB_VER}.tar.bz2
-#  wget http://dev.monetdb.org/downloads/sources/Oct2012/python-monetdb-${MDB_VER}.tar.bz2
+  wget $MDB_URL
   tar xvjf MonetDB-${MDB_VER}.tar.bz2
 fi
 cd MonetDB-${MDB_VER}
-TARGET=$STABLE_SOFT_DIR/builds/monetdb-${MDB_VER}
 ./configure --prefix=$TARGET
 make install -j$LOFAR_BUILD_NJOBS
+check_result "Install Monetdb" "make install" $?
 
 #create symlinks
+MONETDB_TOP_LINK=$STABLE_SOFT_DIR/builds/monetdb-active
+ln -sfn $TARGET $MONETDB_TOP_LINK
 mkdir -p $STABLE_SOFT_DIR/symlinks/bin
 mkdir -p $STABLE_SOFT_DIR/symlinks/lib
 mkdir -p $STABLE_SOFT_DIR/symlinks/python-packages 
 
 
-ln -sfn $TARGET/bin $STABLE_SOFT_DIR/symlinks/bin/monetdb
-ln -sfn $TARGET/lib $STABLE_SOFT_DIR/symlinks/lib/monetdb
-ln -sfn $TARGET/lib/python${LOFAR_PYTHON_VERSION}/site-packages \
+ln -sfn $MONETDB_TOP_LINK/bin $STABLE_SOFT_DIR/symlinks/bin/monetdb
+ln -sfn $MONETDB_TOP_LINK/lib $STABLE_SOFT_DIR/symlinks/lib/monetdb
+ln -sfn $MONETDB_TOP_LINK/lib/python${LOFAR_PYTHON_VERSION}/site-packages \
 	$STABLE_SOFT_DIR/symlinks/python-packages/monetdb
 
 cd $start_dir

@@ -17,7 +17,7 @@ rm -rf log4cplus-1.0.4
 tar xf log4cplus-1.0.4.tar
 cd log4cplus-1.0.4
 ./configure --prefix=$LOG4CPLUS_ROOT_DIR
-make install
+make install -j$LOFAR_BUILD_NJOBS
 export LOG4CPLUS_ROOT_DIR
 
 cd $start_dir

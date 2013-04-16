@@ -20,7 +20,7 @@ index f44efb1..9d817c6 100755
  ###############################################################################
  
 -MONETDBSIPHOME=/home/amints/prog/LOFAR_trunk/CEP/GSM/db
-+MONETDBSIPHOME=/opt/repos/lofar_checkout/LOFAR/CEP/GSM/db
++MONETDBSIPHOME=/opt/share/repos/lofar_checkout/LOFAR/CEP/GSM/db
  
  if [ -z "$*" ]
  then
@@ -61,7 +61,7 @@ index 61cd8d0..655c791 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/repos/tkp-data/catalogs/NVSS-all_strip.csv'
++ '/opt/share/repos/tkp-data/catalogs/NVSS-all_strip.csv'
  USING DELIMITERS ';', '\n'
  NULL AS ''
  ;
@@ -76,7 +76,7 @@ index 0c05d21..1c7faa8 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/repos/tkp-data/catalogs/VLSS-all_strip.csv'
++ '/opt/share/repos/tkp-data/catalogs/VLSS-all_strip.csv'
  USING DELIMITERS ';', '\n'
  NULL AS ''
  ;
@@ -91,7 +91,7 @@ index c61cee3..3c56027 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/repos/tkp-data/catalogs/WENSS-all_strip.csv'
++ '/opt/share/repos/tkp-data/catalogs/WENSS-all_strip.csv'
  USING DELIMITERS ';', '\n' 
  ;
  
