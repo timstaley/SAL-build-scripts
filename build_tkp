@@ -33,7 +33,7 @@ echo "TKP target is $TKP_TARGET"
 
 ln -sfn ${TKP_TARGET}/lib ${SYMLINKS}/lib/tkp
 ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/tkp
-ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/trap
+#ln -sfn ${TKP_TARGET}/lib/python ${SYMLINKS}/python-packages/trap
 ln -sfn ${TKP_TARGET}/bin ${SYMLINKS}/bin/tkp
 
 #----------------------------------------------------------------------------
@@ -67,20 +67,20 @@ ln -sfn $TKP_CATALOGS/VLSS-all_strip.csv vlss/vlss.csv
 cd $startdir
 #----------------------------------------------------------------------------
 #Install trap recipes
-rm -rf $TKP_SVNROOT/trap/build 
-mkdir $TKP_SVNROOT/trap/build
-cd $TKP_SVNROOT/trap/build
-cmake_command="cmake $TKP_SVNROOT/trap 
-		-DCMAKE_INSTALL_PREFIX=${TKP_TARGET}
-		-DPYTHON_PACKAGES_DIR=${TKP_TARGET}/lib/python"
-echo $cmake_command > cmake_command.sh
-bash cmake_command.sh
-check_result "trap" "cmake" $?
-make install
-check_result "trap" "install" $?
-cd $startdir
+#rm -rf $TKP_SVNROOT/trap/build 
+#mkdir $TKP_SVNROOT/trap/build
+#cd $TKP_SVNROOT/trap/build
+#cmake_command="cmake $TKP_SVNROOT/trap 
+#		-DCMAKE_INSTALL_PREFIX=${TKP_TARGET}
+#		-DPYTHON_PACKAGES_DIR=${TKP_TARGET}/lib/python"
+#echo $cmake_command > cmake_command.sh
+#bash cmake_command.sh
+#check_result "trap" "cmake" $?
+#make install
+#check_result "trap" "install" $?
+#cd $startdir
 
-#Symlink the recipes folder to where it was install previously, 
-#so as not to upset all the user-config files:
-ln -sfnv $SYMLINKS/tkp-root/lib/python/trap/recipes $SYMLINKS/tkp-root/recipes
+##Symlink the recipes folder to where it was install previously, 
+##so as not to upset all the user-config files:
+#ln -sfnv $SYMLINKS/tkp-root/lib/python/trap/recipes $SYMLINKS/tkp-root/recipes
 

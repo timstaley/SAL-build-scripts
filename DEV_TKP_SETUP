@@ -26,13 +26,13 @@ cd $SYMLINKS/tkp-root/lib/python
 mv tkp tkp-backup
 mv trap trap-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp tkp
-ln -sfnv ${TKP_DEV_ROOT}/trap/trap trap
+#ln -sfnv ${TKP_DEV_ROOT}/trap/trap trap
 
 cd $SYMLINKS/tkp-root
-mv recipes recipes-backup
-ln -sfnv ${TKP_DEV_ROOT}/trap/trap/recipes recipes
+#mv recipes recipes-backup
+#ln -sfnv ${TKP_DEV_ROOT}/trap/trap/recipes recipes
 mv bin bin-backup
-ln -sfnv ${TKP_DEV_ROOT}/trap/trap/bin bin
+ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/bin bin
 
 
 cd $startdir
