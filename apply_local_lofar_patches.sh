@@ -9,13 +9,13 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 echo 
 echo "**** Applying local patches. *****"
 
-cd $CASAREST_SVNROOT
-for patchfile in $PATCHES_GRP_DIR/casarest-patches/*patch
-do
-    echo $patchfile
-    git apply $patchfile
-    check_result "casarest" "git apply $patchfile" $?
-done
+#cd $CASAREST_SVNROOT
+#for patchfile in $PATCHES_GRP_DIR/casarest-patches/*patch
+#do
+#    echo $patchfile
+#    git apply $patchfile
+#    check_result "casarest" "git apply $patchfile" $?
+#done
 
 cd $PYRAP_SVNROOT
 for patchfile in $PATCHES_GRP_DIR/pyrap-patches/*patch

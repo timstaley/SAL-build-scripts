@@ -20,12 +20,13 @@ SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 CASAREST_REV="${SVN_REV}_${GIT_HASH}"
 CASAREST_TARGET=$TARGET/casarest_r${CASAREST_REV}
+#CASAREST_TARGET=$TARGET/casarest_release-1.1.1
 
 rm -rf build/
 mkdir build
 cd build
 
-cmake_command="cmake $CASAREST_SVNROOT -DCMAKE_INSTALL_PREFIX=$CASAREST_TARGET \
+cmake_command="cmake $CASAREST_SVNROOT/trunk/casarest -DCMAKE_INSTALL_PREFIX=$CASAREST_TARGET \
 	-DCASACORE_ROOT_DIR=${SYMLINKS}/casacore-root \
 	-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR \
 	-DBUILD_ALL=1"
