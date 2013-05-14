@@ -23,15 +23,12 @@ echo "**** Setting up tkp-dev links from folder $TARGET ****"
 
 ####################################################################
 cd $SYMLINKS/tkp-root/lib/python
-mv tkp tkp-backup
-mv trap trap-backup
+mv -v tkp tkp-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp tkp
-#ln -sfnv ${TKP_DEV_ROOT}/trap/trap trap
 
 cd $SYMLINKS/tkp-root
 #mv recipes recipes-backup
-#ln -sfnv ${TKP_DEV_ROOT}/trap/trap/recipes recipes
-mv bin bin-backup
+mv -v bin bin-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/bin bin
 
 
