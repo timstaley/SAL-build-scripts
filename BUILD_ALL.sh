@@ -20,8 +20,7 @@ if [[ -n $update_repos ]]; then
 	update_svn_repo $CASAREST_SVNROOT $CASAREST_REV
 	update_svn_repo $PYRAP_SVNROOT $PYRAP_REV
 	update_authenticated_svn_repo $LOFAR_SVNROOT $LOFAR_SVN_LOGIN $LOFAR_REV
-#	update_git_repo $TKP_SVNROOT/tkp 
-#    update_git_repo $TKP_SVNROOT/trap
+	update_git_repo $TKP_SVNROOT/tkp 
 #	update_svn_repo $LUS_SVNROOT $LUS_REV
 	bash $BUILD_SCRIPTS_DIR/apply_local_lofar_patches.sh
     check_result "Update sources" "Apply patches" $?

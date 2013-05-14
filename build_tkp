@@ -23,11 +23,11 @@ cd $TKP_SVNROOT
 #DB_SHA=$(get_git_short_hash)
 cd $TKP_SVNROOT/tkp
 TKP_SHA=$(get_git_short_hash)
-cd $TKP_SVNROOT/trap
-TRAP_SHA=$(get_git_short_hash)
-cd $TKP_SVNROOTs
+#cd $TKP_SVNROOT/trap
+#TRAP_SHA=$(get_git_short_hash)
+cd $TKP_SVNROOT
 
-TKP_TARGET=${TARGET}/tkp_${TKP_SHA}_trap-${TRAP_SHA}
+TKP_TARGET=${TARGET}/tkp_${TKP_SHA}
 
 echo "TKP target is $TKP_TARGET"
 
