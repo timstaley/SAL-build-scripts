@@ -41,7 +41,7 @@ check_result "pyrap repo" "get" $?
 
 echo "*** Checking out casarest ***"
 mkdir -p $CASAREST_SVNROOT
-git svn clone -r 8700 https://svn.astron.nl/casarest casarest $CASAREST_SVNROOT
+git svn clone -r 8700 https://svn.astron.nl/casarest $CASAREST_SVNROOT
 check_result "casarest repo" "get" $?
 #-------------------------------------------------------------------------------
 echo "*** Checking out LUS ***"
