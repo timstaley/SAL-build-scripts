@@ -27,7 +27,8 @@ mv -v tkp tkp-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp tkp
 
 cd $SYMLINKS/tkp-root
-#mv recipes recipes-backup
+mv recipes recipes-backup
+ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/distribute/cuisine recipes
 mv -v bin bin-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/bin bin
 
