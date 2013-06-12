@@ -10,8 +10,8 @@ echo "*** Grabbing and installing monetdb ***"
 #MDB_URL=http://dev.monetdb.org/downloads/sources/Oct2012-SP1/MonetDB-11.13.5.tar.bz2
 #MDB_VER=11.13.9
 #MDB_URL=http://dev.monetdb.org/downloads/sources/Oct2012-SP3/MonetDB-${MDB_VER}.tar.bz2
-MDB_VER=11.15.1
-MDB_URL=http://dev.monetdb.org/downloads/sources/Feb2013/MonetDB-${MDB_VER}.tar.bz2
+MDB_VER=11.15.7
+MDB_URL=http://dev.monetdb.org/downloads/sources/Feb2013-SP2/MonetDB-${MDB_VER}.tar.bz2
 
 TARGET=$STABLE_SOFT_DIR/builds/monetdb-${MDB_VER}
 
