@@ -18,20 +18,26 @@ do
   if [[ $foldername == bin || $foldername == lib ]]; then 
     for f in `find -L $group_path/*  -maxdepth 1 -type f`;
     do
-#      echo "ln -sfnv $f $collated_subfolder/"
-      ln -sn $f $collated_subfolder/
+#      echo "was ln -sfnv $f $collated_subfolder/"
+      filename=$(basename $f)
+      filedir=$(dirname  $f)
+      realfilename=$(cd $filedir && pwd -P)/$filename
+#      echo "is ln -sfnv $realfilename $collated_subfolder/"
+      ln -sn $realfilename $collated_subfolder/
     done
     unset f
   fi
 
 #Pythonpath is a special case as we want to symlink folders, not files:
   if [[ $foldername == python-packages ]]; then 
-    for f in `find -L $group_path/* -mindepth 1 -maxdepth 1 -type d`;
+    for d in `find -L $group_path/* -mindepth 1 -maxdepth 1 -type d`;
     do
-#      echo "ln -sfnv $f $collated_subfolder/"
-      ln -sn $f $collated_subfolder/
+#      echo "was ln -sfnv $d $collated_subfolder/"
+      realdir=$(cd $d && pwd -P)
+#      echo "is ln -sfnv $realdir $collated_subfolder/"
+      ln -sn $realdir $collated_subfolder/
     done
-    unset f
+    unset d
   fi
     
   unset group_path collated_subfolder
