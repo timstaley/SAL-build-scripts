@@ -69,6 +69,7 @@ update_authenticated_svn_repo() {
 
 update_git_repo() {
     SOURCEDIR=${1}
+    BRANCH=${2}
 #    REVISION=${2}
     cd $SOURCEDIR
 		echo 
@@ -76,7 +77,12 @@ update_git_repo() {
     echo "*** Updating repo at $SOURCEDIR. ***"
     git clean -df
     check_result "$SOURCEDIR update" "clean" $?
-    git checkout -f master
+
+    if [ $BRANCH ];    then
+        git checkout -f $BRANCH
+    else
+        git checkout -f master
+    fi
     check_result "$SOURCEDIR update" "checkout master" $?
     git pull
     check_result "$SOURCEDIR update" "pull" $?
