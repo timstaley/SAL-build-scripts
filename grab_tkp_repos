@@ -19,5 +19,6 @@ check_result "tkp repo" "get" $?
 echo "*** Checking out TKP-data ***"
 mkdir -p  $TKP_DATA
 git svn clone -r9 http://svn.transientskp.org/data  $TKP_DATA
+echo $( cd $TKP_DATA && git svn rebase )
 check_result "tkp data repo" "get" $?
 #-------------------------------------------------------------------------------
