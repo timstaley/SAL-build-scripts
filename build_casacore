@@ -1,17 +1,9 @@
 #!/bin/bash
 ####################################################################
 startdir=`pwd`
-BUILD_SCRIPTS_DIR=`dirname ${0}`
-BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 source $BUILD_SCRIPTS_DIR/CONFIG
 source $BUILD_SCRIPTS_DIR/utils.sh
-
-cd $ARCHIVE_LATEST_DIR_LINK
-TARGET=`pwd -P`
-
-SYMLINKS=$TARGET/symlinks
-echo "Installing into $TARGET"
-
 ####################################################################
 echo "*** Building casacore... ***"
 cd $CASACORE_SVNROOT
@@ -19,25 +11,24 @@ cd $CASACORE_SVNROOT
 SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 CASACORE_REV="${SVN_REV}_${GIT_HASH}"
-CASACORE_TARGET=$TARGET/casacore_r${CASACORE_REV}
+BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/casacore_r${CASACORE_REV}
+echo "Installing into $BUILD_TARGET"
 
-ln -sfn $CASACORE_TARGET $SYMLINKS/casacore-root
+ln -sfn $BUILD_TARGET $STABLE_SOFT_DIR/builds/casacore/casacore-latest
 
-scons -j $LOFAR_BUILD_NJOBS --prefix=$CASACORE_TARGET  --enable-shared --disable-static  --wcs-root=$WCSLIB_ROOT_DIR   --data-dir=$CASA_MEASURES/data install
+scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --wcs-root=$WCSLIB_ROOT_DIR   --data-dir=$CASA_MEASURES/data install
 
 check_result "casacore" "scons" $?
 
-#Copy in the measures data:
-mkdir -p $CASACORE_TARGET/share/casacore/data
-cp -rf $CASAREST_SVNROOT/measures_data/ephemerides $CASAREST_SVNROOT/measures_data/geodetic \
-	$CASACORE_TARGET/share/casacore/data
+##Copy in the measures data:
+#mkdir -p $BUILD_TARGET/share/casacore/data
+#cp -rf $CASA_MEASURES/data/ephemerides $CASA_MEASURES/data/geodetic \
+#	$BUILD_TARGET/share/casacore/data
 
-ln -sfn $CASACORE_TARGET $SYMLINKS/casacore-root
-ln -sfn $CASACORE_TARGET/bin $SYMLINKS/bin/casacore
-ln -sfn $CASACORE_TARGET/lib $SYMLINKS/lib/casacore
-
-rm $CASACORE_TARGET/bin/msselect #NB there is a tool of the same name in the Lofar bin
+#rm $CASACORE_TARGET/bin/msselect #NB there is a tool of the same name in the Lofar bin
 #My path setting tools will complain about the naming clash when trying to create symlinks in a common bin folder.
 #By removing this clash  (rather than just suppressing the error), at least I'll notice if there's any new clashes.
+
+
 
 

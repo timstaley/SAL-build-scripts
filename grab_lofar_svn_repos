@@ -1,59 +1,23 @@
 #!/bin/bash
-#-------------------------------------------------------------------------------
-#Pull in general lofar build config:
-. `dirname ${0}`/CONFIG
-. `dirname ${0}`/utils.sh
+####################################################################
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
 
-#-------------------------------------------------------------------------------
-# Do lofar /tkp checkouts first, so as to prompt the user for a password if necessary
-# NB: note the username encoded in the URLS below.
-
+#------------------------------------------------------------------------------
 echo "*** Checking out LOFAR ***"
 mkdir -p $LOFAR_SVNROOT 
 git svn clone --username $LOFAR_SVN_LOGIN -r22500 https://@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
 cd $LOFAR_SVNROOT
 git svn fetch #For some reason, (https?) extra step required here.
 check_result "lofar repo" "get" $?
-#-------------------------------------------------------------------------------
-echo "*** Checking out TKP repos ***"
-mkdir -p  $TKP_SVNROOT
-git clone git@github.com:transientskp/tkp.git  $TKP_SVNROOT/tkp
-check_result "tkp repo" "get" $?
-git clone git@github.com:transientskp/trap.git  $TKP_SVNROOT/trap
-check_result "trap repo" "get" $?
-#-------------------------------------------------------------------------------
-echo "*** Checking out casacore ***"
-mkdir -p  $CASACORE_SVNROOT 
-git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
-check_result "casacore repo" "get" $?
-#Casacore needs latest 'measures' data for accurate co-ord conversions:
-mkdir -p cd $CASA_MEASURES
-cd $CASA_MEASURES
-wget ftp://ftp.atnf.csiro.au/pub/software/measures_data/measures_data.tar.bz2
-tar xvjf measures_data.tar.bz2
 
-echo "*** Checking out pyrap ***"
-mkdir -p $PYRAP_SVNROOT
-git svn clone -r314 http://pyrap.googlecode.com/svn/trunk/ $PYRAP_SVNROOT
-cd $PYRAP_SVNROOT
-git svn fetch
-check_result "pyrap repo" "get" $?
 
-echo "*** Checking out casarest ***"
-mkdir -p $CASAREST_SVNROOT
-git svn clone -r 8700 https://svn.astron.nl/casarest $CASAREST_SVNROOT
-check_result "casarest repo" "get" $?
 #-------------------------------------------------------------------------------
-echo "*** Checking out LUS ***"
-mkdir -p $LUS_SVNROOT
-git svn clone -r 9750 http://usg.lofar.org/svn/code/trunk $LUS_SVNROOT
-check_result "LUS repo" "get" $?
-#-------------------------------------------------------------------------------
-#Leave this till last, we don't need it until after the build.
-echo "*** Checking out TKP-data ***"
-mkdir -p  $TKP_DATA
-git svn clone -r9 http://svn.transientskp.org/data  $TKP_DATA
-check_result "tkp data repo" "get" $?
+#echo "*** Checking out LUS ***"
+#mkdir -p $LUS_SVNROOT
+#git svn clone -r 9750 http://usg.lofar.org/svn/code/trunk $LUS_SVNROOT
+#check_result "LUS repo" "get" $?
 #-------------------------------------------------------------------------------
 
 echo "*** LOFAR svn group repos checked out successfully *** "

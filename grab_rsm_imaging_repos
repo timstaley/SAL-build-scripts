@@ -1,0 +1,15 @@
+#!/bin/bash
+####################################################################
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+
+#------------------------------------------------------------------------------
+echo "*** Checking out LOFAR ***"
+mkdir -p $LOFAR_SVNROOT 
+git clone git@github.com:transientskp/lofim.git $RSM_SVNROOT
+cd $RSM_SVNROOT
+check_result "RSM imaging repo" "get" $?
+
+echo "*** RSM imaging repo checked out successfully *** "
+

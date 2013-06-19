@@ -1,15 +1,21 @@
 #!/bin/bash
-#Setup the various environment paths:
+###############################################
+#Collect list of files listed in bin/lib/python-packages subdirs of various 
+#packages, symlink them all into one place for easy path addition:
+##############################################
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source $SCRIPT_DIR/../../CONFIG
 
-stable_software_path=/opt/share/soft
-collated_paths_folder=$stable_software_path/symlinks/archive/`date +%F-%H-%M`
-
-#rm -rf $collated_paths_folder
+collated_paths_folder=$STABLE_SOFT_DIR/symlinks/archive/`date +%F-%H-%M`
+rm -rf $collated_paths_folder
 mkdir -p $collated_paths_folder
+
+ln -sfn $collated_paths_folder $STABLE_SOFT_DIR/symlinks/buildset-latest
+
 
 for foldername in bin lib python-packages ; 
 do
-  group_path=$stable_software_path/symlinks/${foldername}
+  group_path=$STABLE_SOFT_DIR/symlinks/${foldername}
   collated_subfolder=$collated_paths_folder/${foldername}      
   mkdir -p $collated_subfolder
 
@@ -44,5 +50,11 @@ do
 done
 
 unset foldername collated_paths_folder
+echo "***********************************************************************"
+echo "Symlinks collected. Latest buildset is always referenced by:"
+echo "$STABLE_SOFT_DIR/symlinks/buildset-latest"
+echo "You may wish to update your default buildset symlink, using the command:"
+echo "ln -sfn \$(readlink $STABLE_SOFT_DIR/symlinks/buildset-latest) $STABLE_SOFT_DIR/software-buildset-default"
+echo "***********************************************************************"
 
 

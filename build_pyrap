@@ -1,17 +1,9 @@
 #!/bin/bash
 ####################################################################
 startdir=`pwd`
-BUILD_SCRIPTS_DIR=`dirname ${0}`
-BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 source $BUILD_SCRIPTS_DIR/CONFIG
 source $BUILD_SCRIPTS_DIR/utils.sh
-
-cd $ARCHIVE_LATEST_DIR_LINK
-TARGET=`pwd -P`
-
-SYMLINKS=$TARGET/symlinks
-echo "Installing into $TARGET"
-
 ####################################################################
 echo "*** Building pyrap... ***"
 cd $PYRAP_SVNROOT
@@ -19,21 +11,26 @@ cd $PYRAP_SVNROOT
 SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 PYRAP_REV="${SVN_REV}_${GIT_HASH}"
+BUILD_TARGET=$STABLE_SOFT_DIR/builds/pyrap/pyrap_r${PYRAP_REV}
+echo "Installing into $BUILD_TARGET"
 
-PYRAP_TARGET=$TARGET/pyrap_r${PYRAP_REV}
-build_command="./batchbuild-trunk.py  --prefix=$PYRAP_TARGET --casacore-root=${SYMLINKS}/casacore-root \
-	--python-prefix=$PYRAP_TARGET/pythonpackage --wcs-root=$WCSLIB_ROOT_DIR install"
-echo "$build_command" > lofar_build_command.sh
+
+ln -sfn $BUILD_TARGET $STABLE_SOFT_DIR/builds/pyrap/pyrap-latest
+build_command="./batchbuild-trunk.py  --prefix=$BUILD_TARGET \
+    --casacore-root=$(readlink ${STABLE_SOFT_DIR}/builds/casacore/casacore-latest ) \
+	--python-prefix=$BUILD_TARGET/pythonpackage --wcs-root=$WCSLIB_ROOT_DIR install"
+echo "$build_command" > pyrap_build_command.sh
 $build_command
 
 check_result "pyrap" "batchbuild-trunk" $?
-ln -sfn $PYRAP_TARGET $SYMLINKS/pyrap-root
-ln -sfn $PYRAP_TARGET/lib $SYMLINKS/lib/pyrap
+
+unpack_pth_file ${BUILD_TARGET}/pythonpackage/easy-install.pth ${BUILD_TARGET}/unpacked
+
+
+##make .pth paths absolute, so we can symlink to it:
+#sed -i "s@^./@${BUILD_TARGET}/pythonpackage/@g" \
+#	${BUILD_TARGET}/pythonpackage/easy-install.pth
 
 
 
-#make .pth paths absolute, so we can symlink to it:
-sed -i "s@^./@${PYRAP_TARGET}/pythonpackage/@g" \
-	${PYRAP_TARGET}/pythonpackage/easy-install.pth
-ln -sfn ${PYRAP_TARGET}/pythonpackage/easy-install.pth $SYMLINKS/python-packages/pyrap.pth 
 

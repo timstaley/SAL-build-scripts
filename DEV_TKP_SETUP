@@ -2,33 +2,22 @@
 ####################################################################
 
 ## Messes with the 'lofar-latest' installation in order to create a development setup.
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source $BUILD_SCRIPTS_DIR/CONFIG
 
 TKP_DEV_ROOT=$HOME/code/tkp-dev
-
-DEV_INSTALL_TARGET=/opt/lofar-dev
+DEV_INSTALL_TARGET=$TKP_BUILDS_DIR/tkp-dev
 
 ####################################################################
-startdir=`pwd`
-BUILD_SCRIPTS_DIR=`dirname ${0}`
-BUILD_SCRIPTS_DIR=`cd $BUILD_SCRIPTS_DIR; pwd -P`
-source $BUILD_SCRIPTS_DIR/CONFIG
-source $BUILD_SCRIPTS_DIR/utils.sh
-
-#cd $ARCHIVE_LATEST_DIR_LINK
 cd $DEV_INSTALL_TARGET
 TARGET=`pwd -P`
 
-SYMLINKS=$TARGET/symlinks
-echo "**** Setting up tkp-dev links from folder $TARGET ****"
-
 ####################################################################
-cd $SYMLINKS/tkp-root/lib/python
+cd $TARGET/python-packages
 mv -v tkp tkp-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp tkp
 
-cd $SYMLINKS/tkp-root
-mv recipes recipes-backup
-ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/distribute/cuisine recipes
+cd $TARGET
 mv -v bin bin-backup
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/bin bin
 

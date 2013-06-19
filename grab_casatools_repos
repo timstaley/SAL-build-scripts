@@ -1,0 +1,31 @@
+#!/bin/bash
+####################################################################
+BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+source $BUILD_SCRIPTS_DIR/CONFIG
+source $BUILD_SCRIPTS_DIR/utils.sh
+#-------------------------------------------------------------------------------
+
+echo "*** Checking out casacore ***"
+mkdir -p  $CASACORE_SVNROOT 
+git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
+check_result "casacore repo" "get" $?
+
+#Casacore needs latest 'measures' data for accurate co-ord conversions:
+mkdir -p cd $CASA_MEASURES
+cd $CASA_MEASURES
+wget ftp://ftp.atnf.csiro.au/pub/software/measures_data/measures_data.tar.bz2
+tar xvjf measures_data.tar.bz2
+
+echo "*** Checking out pyrap ***"
+mkdir -p $PYRAP_SVNROOT
+git svn clone -r314 http://pyrap.googlecode.com/svn/trunk/ $PYRAP_SVNROOT
+cd $PYRAP_SVNROOT
+git svn fetch
+check_result "pyrap repo" "get" $?
+
+echo "*** Checking out casarest ***"
+mkdir -p $CASAREST_SVNROOT
+git svn clone -r 8700 https://svn.astron.nl/casarest $CASAREST_SVNROOT
+check_result "casarest repo" "get" $?
+
+#------------------------------------------------------------------------------

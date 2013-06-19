@@ -1,6 +1,7 @@
+##Check that the most recent command returned a zero exit code. If not, print error and exit
 check_result() {
-    COMPONENT=${1}
-    STEP=${2}
+    COMPONENT=${1} #General name for current task
+    STEP=${2} #Name of specific task in current task
     RESULT=${3}
     if [ $RESULT -ne 0 ]
     then
@@ -12,12 +13,14 @@ check_result() {
 }
 
 update_svn_repo() {
-    SOURCEDIR=${1}
-    REVISION=${2}
+    SOURCEDIR=${1} #path to svn repo
+    REVISION=${2} #revision to check out (optional, defaults to HEAD)
     cd $SOURCEDIR
 		echo 
 		echo
     echo "*** Updating sources at $SOURCEDIR. ***"
+    git_update_startdir=$(pwd)
+    cd $SOURCEDIR
     git clean -df
     check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
@@ -36,16 +39,20 @@ update_svn_repo() {
 	    check_result "$SOURCEDIR update" "rev change" $?
 			unset GIT_HASH
     fi
+    cd "$git_update_startdir"
+    unset git_update_startdir
 }
 
 update_authenticated_svn_repo() {
-    SOURCEDIR=${1}
-    SVN_LOGIN=${2}
-    REVISION=${3}
+    SOURCEDIR=${1} #path to svn repo
+    SVN_LOGIN=${2} #login username
+    REVISION=${3} #revision to check out (optional, defaults to HEAD)
     cd $SOURCEDIR
 		echo 
 		echo
     echo "*** Updating sources at $SOURCEDIR. ***"
+    git_update_startdir=$(pwd)
+    cd $SOURCEDIR
     git clean -df
     check_result "$SOURCEDIR update" "clean" $?
     git checkout -f master
@@ -64,17 +71,20 @@ update_authenticated_svn_repo() {
 	    check_result "$SOURCEDIR update" "rev change" $?
 			unset GIT_HASH
     fi
+    cd "$git_update_startdir"
+    unset git_update_startdir
 }
 
 
 update_git_repo() {
-    SOURCEDIR=${1}
-    BRANCH=${2}
-#    REVISION=${2}
+    SOURCEDIR=${1} #path to git repo
+    BRANCH=${2} #branch to check out
     cd $SOURCEDIR
 		echo 
 		echo
     echo "*** Updating repo at $SOURCEDIR. ***"
+    git_update_startdir=$(pwd)
+    cd $SOURCEDIR
     git clean -df
     check_result "$SOURCEDIR update" "clean" $?
 
@@ -86,13 +96,41 @@ update_git_repo() {
     check_result "$SOURCEDIR update" "checkout master" $?
     git pull
     check_result "$SOURCEDIR update" "pull" $?
+    cd "$git_update_startdir"
+    unset git_update_startdir
 }
 
 
+#Get svn revision number for git-svn repository in current working directory
 get_git_svnrev(){
-echo `git svn find-rev HEAD`
+echo `git svn find-rev HEAD` 
 }
 
+#Get short version of SHA1 hash for git repository in current working directory
 get_git_short_hash(){
 echo `git log --pretty=format:'%h' -n 1`
 }
+
+#Some python packages want to be installed via a .pth file.
+#This is a pain for continuous deployment, since you can't simply add the .pth to the PYTHONPATH environment variable.
+#But, we can unpack the .pth contents to a destination of our choosing, and then use the results:
+unpack_pth_file() {
+    pth_file=${1} #path to .pth file.
+    target_dir=${2} #e.g. /some/versioned/build/lib/python2.7/site-packages
+    mkdir -p "$target_dir"
+    for word in $(<$pth_file); do
+        if [[ ${word: -4} == ".egg" && -d ${word} ]]; then
+#            echo "${word} is a valid egg dir"
+            eggdir=${word}
+            for pkgdir in $(find -L $eggdir/* -mindepth 0 -maxdepth 0 -type d); do
+                if [[ $(basename $pkgdir) != EGG-INFO ]] ; then
+#                    echo "Found '$(basename $pkgdir)' in $pkgdir"
+                    cp -r "$pkgdir" "$target_dir"
+                fi 
+            done
+        fi
+    done
+}
+
+
+
