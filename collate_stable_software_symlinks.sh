@@ -4,7 +4,7 @@
 #packages, symlink them all into one place for easy path addition:
 ##############################################
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-source $SCRIPT_DIR/../../CONFIG
+source $SCRIPT_DIR/CONFIG
 
 collated_paths_folder=$STABLE_SOFT_DIR/symlinks/archive/`date +%F-%H-%M`
 rm -rf $collated_paths_folder
@@ -54,7 +54,7 @@ echo "***********************************************************************"
 echo "Symlinks collected. Latest buildset is always referenced by:"
 echo "$STABLE_SOFT_DIR/symlinks/buildset-latest"
 echo "You may wish to update your default buildset symlink, using the command:"
-echo "ln -sfn \$(readlink $STABLE_SOFT_DIR/symlinks/buildset-latest) $STABLE_SOFT_DIR/software-buildset-default"
+echo "ln -sfn \$(readlink $STABLE_SOFT_DIR/symlinks/buildset-latest) $STABLE_SOFT_DIR/default-buildset"
 echo "***********************************************************************"
 
 
