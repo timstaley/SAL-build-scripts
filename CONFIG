@@ -19,7 +19,7 @@ fi
 export DOWNLOAD_LOFAR_DEPS=1 ##Use wget to get the source files. Comment out if you already have them.
 export UPDATE_REPOS=1
 #Where to checkout the repositories
-SVN_GRP_DIR=/data2/repos
+SVN_GRP_DIR=/media/RAIDA/repos
 #Where to store the stable packages
 LOFAR_DEPS_ROOT=$SVN_GRP_DIR
 #Where to find local Lofar patches:
@@ -30,12 +30,12 @@ TKP_DATA=$SVN_GRP_DIR/tkp-data
 #------------------------------------------------------------------------------
 ## Install dirs:
 # Stable software parent dir: This is where casatools, Monetdb, etc will get installed to. 
-STABLE_SOFT_DIR=/opt/soft
+STABLE_SOFT_DIR=/opt/share/soft
 # Lofar parent dir: This is where the Lofar imaging pipeline goes. 
 # Builds will be archived by date and SHA hash in a subdir.
-LOFAR_BUILDS_DIR=/opt/lofar
+LOFAR_BUILDS_DIR=/opt/share/lofar
 # Same as above, but for the TKP transients pipeline:
-TKP_BUILDS_DIR=/opt/tkp
+TKP_BUILDS_DIR=/opt/share/tkp
 
 
 #------------------------------------------------------------------------------
