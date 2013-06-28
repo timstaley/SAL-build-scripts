@@ -18,6 +18,11 @@ INIT_SCRIPT_STARTDIR=$(pwd)
 if [[ -z "$PREF_SOFT_BUILD" ]];
 then
     SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+    if ! [ -L $SCRIPT_DIR/default-buildset ]; then 
+        echo "Please create a default-buildset pointing symlink, e.g. using"
+        echo "ln -sfnv $(readlink symlinks/buildset-latest) default-buildset"
+        return 1
+    fi    
     PREF_SOFT_BUILD=$( cd $SCRIPT_DIR/default-buildset && pwd -P )
 fi
 

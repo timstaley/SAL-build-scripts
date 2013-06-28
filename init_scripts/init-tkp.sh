@@ -18,6 +18,11 @@ INIT_SCRIPT_STARTDIR=$(pwd)
 if [[ -z "$PREF_TKP_BUILD" ]];
 then
     SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+    if ! [ -L $SCRIPT_DIR/default-build ]; then 
+        echo "Please create a default-build pointing symlink, e.g. using"
+        echo "ln -sfnv $(readlink tkp-latest) default-build"
+        return 1
+    fi    
     PREF_TKP_BUILD=$( cd $SCRIPT_DIR/default-build && pwd -P )
 fi
 
