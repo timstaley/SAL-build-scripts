@@ -15,17 +15,15 @@
 
 SAL_LOGDIR="$HOME/.salbuilds"
 
-INIT_SCRIPT_STARTDIR=$(pwd)
-
 if [[ -z "$PREF_LOFAR_BUILD" ]];
 then
-    SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-    if ! [ -L $SCRIPT_DIR/default-build ]; then 
+    SAL_INIT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+    if ! [ -L $SAL_INIT_SCRIPT_DIR/default-build ]; then 
         echo "Please create a default-build pointing symlink, e.g. using"
-        echo "ln -sfnv $(readlink lofar-latest) default-build"
+        echo "ln -sfnv \$(readlink $SAL_INIT_SCRIPT_DIR/lofar-latest) $SAL_INIT_SCRIPT_DIR/default-build"
         return 1
     fi    
-    PREF_LOFAR_BUILD=$( cd $SCRIPT_DIR/default-build && pwd -P )
+    PREF_LOFAR_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-build && pwd -P )
 fi
 
 export PATH=${PATH:+${PATH}:}${PREF_LOFAR_BUILD}/bin 
@@ -37,9 +35,8 @@ export LOFARROOT=$PREF_LOFAR_BUILD
 #Log which builds used when:
 mkdir -p $SAL_LOGDIR
 echo "$(date) --- $PREF_LOFAR_BUILD" >> $SAL_LOGDIR/lofar_builds_used.log
-cd $SCRIPT_DIR
-echo "$(date) --- $PREF_LOFAR_BUILD --- $(whoami) --- $(hostname)" >> lofar_builds_used.log
+echo "$(date) --- $PREF_LOFAR_BUILD --- $(whoami) --- $(hostname)" >> "${SAL_INIT_SCRIPT_DIR}/lofar_builds_used.log"
 unset SAL_LOGDIR
+unset SAL_INIT_SCRIPT_DIR
 #---------------------------------------------------------------------------
-cd "$INIT_SCRIPT_STARTDIR"
-unset INIT_SCRIPT_STARTDIR
+

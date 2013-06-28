@@ -13,17 +13,15 @@
 
 SAL_LOGDIR="$HOME/.salbuilds"
 
-INIT_SCRIPT_STARTDIR=$(pwd)
-
 if [[ -z "$PREF_SOFT_BUILD" ]];
 then
-    SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-    if ! [ -L $SCRIPT_DIR/default-buildset ]; then 
+    SAL_INIT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+    if ! [ -L $SAL_INIT_SCRIPT_DIR/default-buildset ]; then 
         echo "Please create a default-buildset pointing symlink, e.g. using"
-        echo "ln -sfnv $(readlink symlinks/buildset-latest) default-buildset"
+        echo "ln -sfnv \$(readlink $SAL_INIT_SCRIPT_DIR/symlinks/buildset-latest) $SAL_INIT_SCRIPT_DIR/default-buildset"
         return 1
     fi    
-    PREF_SOFT_BUILD=$( cd $SCRIPT_DIR/default-buildset && pwd -P )
+    PREF_SOFT_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-buildset && pwd -P )
 fi
 
 export PATH=${PATH:+${PATH}:}${PREF_SOFT_BUILD}/bin 
@@ -34,9 +32,8 @@ export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}${PREF_SOFT_BUILD}/python-package
 #Log which builds used when:
 mkdir -p $SAL_LOGDIR
 echo "$(date) --- $PREF_SOFT_BUILD" >> $SAL_LOGDIR/soft_buildsets_used.log
-cd $SCRIPT_DIR
-echo "$(date) --- $PREF_SOFT_BUILD --- $(whoami) --- $(hostname)" >> soft_buildsets_used.log
+echo "$(date) --- $PREF_SOFT_BUILD --- $(whoami) --- $(hostname)" >> "${SAL_INIT_SCRIPT_DIR}/soft_buildsets_used.log"
 unset SAL_LOGDIR
+unset SAL_INIT_SCRIPT_DIR
 #---------------------------------------------------------------------------
-cd "$INIT_SCRIPT_STARTDIR"
-unset INIT_SCRIPT_STARTDIR
+
