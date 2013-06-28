@@ -20,7 +20,7 @@ rm -rf build/
 mkdir build
 cd build
 
-ln -sfn $BUILD_TARGET $STABLE_SOFT_DIR/builds/casarest/casarest-latest
+ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/casarest/casarest-latest
 
 cmake_command="cmake $CASAREST_SVNROOT/trunk/casarest -DCMAKE_INSTALL_PREFIX=$BUILD_TARGET \
 	-DCASACORE_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casacore/casacore-latest ) \

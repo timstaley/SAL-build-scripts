@@ -14,7 +14,7 @@ CASACORE_REV="${SVN_REV}_${GIT_HASH}"
 BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/casacore_r${CASACORE_REV}
 echo "Installing into $BUILD_TARGET"
 
-ln -sfn $BUILD_TARGET $STABLE_SOFT_DIR/builds/casacore/casacore-latest
+ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/casacore/casacore-latest
 
 scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --wcs-root=$WCSLIB_ROOT_DIR   --data-dir=$CASA_MEASURES/data install
 

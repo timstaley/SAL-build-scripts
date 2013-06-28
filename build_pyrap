@@ -15,7 +15,8 @@ BUILD_TARGET=$STABLE_SOFT_DIR/builds/pyrap/pyrap_r${PYRAP_REV}
 echo "Installing into $BUILD_TARGET"
 
 
-ln -sfn $BUILD_TARGET $STABLE_SOFT_DIR/builds/pyrap/pyrap-latest
+ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/pyrap/pyrap-latest
+
 build_command="./batchbuild-trunk.py  --prefix=$BUILD_TARGET \
     --casacore-root=$(readlink ${STABLE_SOFT_DIR}/builds/casacore/casacore-latest ) \
 	--python-prefix=$BUILD_TARGET/pythonpackage --wcs-root=$WCSLIB_ROOT_DIR install"
