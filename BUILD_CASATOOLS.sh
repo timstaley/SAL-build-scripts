@@ -28,4 +28,5 @@ check_result "casarest" "build script" $?
 bash $BUILD_SCRIPTS_DIR/build_pyrap
 check_result "pyrap" "build script" $?
 
-bash update_casatools_symlinks.sh
+cd $BUILD_SCRIPTS_DIR
+bash $BUILD_SCRIPTS_DIR/update_casatools_symlinks.sh
