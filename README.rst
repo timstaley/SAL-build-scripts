@@ -36,7 +36,7 @@ for end-users, we manually update a symlink to the current desired buildset,
 and end-users simply run an environment setup script sourced via that symlink.
 This also allows multiple buildsets to be used concurrently, for purposes of
 testing, stability and backwards compatibility - simply set the environment variable 
-(e.g. ``SAL_STABLE_BUILDSET``) pointing to the desired buildset before sourcing the 
+(e.g. ``PREF_SOFT_BUILD``) pointing to the desired buildset before sourcing the 
 init script that adds the relevant directories to the environment path variables.
 
 The symlinking process is a bit arcane, but has been refined to resolve 
