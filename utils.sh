@@ -114,32 +114,32 @@ echo `git log --pretty=format:'%h' -n 1`
 #Some python packages want to be installed via a .pth file.
 #This is a pain for continuous deployment, since you can't simply add the .pth to the PYTHONPATH environment variable.
 #But, we can unpack the .pth contents to a destination of our choosing, and then use the results:
-# **Beware, only really tested in an easy-install.pth where all paths were relative and pointed to same dir.**
 unpack_pth_file() {
     pth_file=${1} #path to .pth file.
     target_dir=${2} #e.g. /some/versioned/build/lib/python2.7/site-packages
     mkdir -p "$target_dir"
+    #.pth file paths can be absolute, or relative to the .pth file.
+    #To deal with both cases, we cd to the same directory as the .pth file
+    #Carefully ensuring that our path parameters updated accordingly.
+    #Make target dir an absolute path:
+    target_dir=$(cd ${target_dir} && pwd -P) 
+    unpack_pth_file_startdir="$(pwd)"
+    cd $(dirname ${pth_file})
+    pth_file=$(basename ${pth_file})
+#    echo "PWD: $(pwd)"
     for word in $(<$pth_file); do
-        echo "Parsing a word: $word" 
-        wordpath=""
-        if [[ "$word" = /* ]]; then 
-            #Should be absolute path, OK...
-            wordpath="$word"
-        else
-            #relative path; but we may not be in the same dir as .pth file, make absolute:
-            wordpath=$(dirname "$pth_file")/"${word:1}"
-        fi
-        if [[ ${wordpath: -4} == ".egg" && -d ${wordpath} ]]; then
-            echo "${wordpath} is a valid egg dir"
-            eggdir=${wordpath}
+        if [[ ${word: -4} == ".egg" && -d ${word} ]]; then
+#            echo "${word} is a valid egg dir"
+            eggdir=${word}
             for pkgdir in $(find -L $eggdir/* -mindepth 0 -maxdepth 0 -type d); do
                 if [[ $(basename $pkgdir) != EGG-INFO ]] ; then
-                    echo "Found '$(basename $pkgdir)' in $pkgdir"
-                    cp -rv "$pkgdir" "$target_dir"
+#                    echo "Found '$(basename $pkgdir)' in $pkgdir"
+                    cp -r "$pkgdir" "$target_dir"
                 fi 
             done
         fi
     done
+    cd "${unpack_pth_file_startdir}"
 }
 
 
