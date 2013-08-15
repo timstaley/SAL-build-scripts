@@ -51,7 +51,7 @@ GIT_HASH=$(get_git_short_hash)
 LOFAR_REV="${SVN_REV}_${GIT_HASH}"
 LOFAR_TARGET=$ARCHIVE_TARGET/LOFAR_r${LOFAR_REV}
 
-ln -sfn $ARCHIVE_TARGET $LOFAR_BUILDS_DIR/lofar-latest
+ln -sfn $LOFAR_TARGET $LOFAR_BUILDS_DIR/lofar-latest
 
 
 echo "Regenerating cmake package list:"
