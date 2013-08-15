@@ -25,9 +25,8 @@ check_result "casacore" "scons" $?
 #cp -rf $CASA_MEASURES/data/ephemerides $CASA_MEASURES/data/geodetic \
 #	$BUILD_TARGET/share/casacore/data
 
-#rm $CASACORE_TARGET/bin/msselect #NB there is a tool of the same name in the Lofar bin
-#My path setting tools will complain about the naming clash when trying to create symlinks in a common bin folder.
-#By removing this clash  (rather than just suppressing the error), at least I'll notice if there's any new clashes.
+rm -v $BUILD_TARGET/bin/msselect #NB there is a tool of the same name in the Lofar bin
+
 
 
 
