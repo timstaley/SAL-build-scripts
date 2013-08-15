@@ -1,18 +1,17 @@
-From bb469696d6018c21446b3f005de29baafd11515e Mon Sep 17 00:00:00 2001
+From d46937878759b6d7d0ba37e4a9e4db28940348d9 Mon Sep 17 00:00:00 2001
 From: Tim Staley <tim.staley@soton.ac.uk>
-Date: Fri, 16 Nov 2012 14:29:16 +0000
-Subject: [PATCH] Fix gsm.py and GSM install script for Soton cluster.
+Date: Thu, 15 Aug 2013 17:51:46 +0100
+Subject: [PATCH 1/2] Fix GSM database init scripts with Soton paths.
 
 ---
  CEP/GSM/db/batches/setup.db.Dec2011.batch |   12 ++++++------
  CEP/GSM/db/load/load.cat.nvss.sql         |    4 ++--
  CEP/GSM/db/load/load.cat.vlss.sql         |    4 ++--
  CEP/GSM/db/load/load.cat.wenss.sql        |    4 ++--
- CEP/GSM/src/gsm.py                        |    7 +++----
- 5 files changed, 15 insertions(+), 16 deletions(-)
+ 4 files changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/CEP/GSM/db/batches/setup.db.Dec2011.batch b/CEP/GSM/db/batches/setup.db.Dec2011.batch
-index f44efb1..9d817c6 100755
+index f44efb1..f6df15f 100755
 --- a/CEP/GSM/db/batches/setup.db.Dec2011.batch
 +++ b/CEP/GSM/db/batches/setup.db.Dec2011.batch
 @@ -22,7 +22,7 @@
@@ -20,7 +19,7 @@ index f44efb1..9d817c6 100755
  ###############################################################################
  
 -MONETDBSIPHOME=/home/amints/prog/LOFAR_trunk/CEP/GSM/db
-+MONETDBSIPHOME=/opt/share/repos/lofar_checkout/LOFAR/CEP/GSM/db
++MONETDBSIPHOME=/media/RAIDA/repos/lofar_checkout/LOFAR/CEP/GSM/db
  
  if [ -z "$*" ]
  then
@@ -51,7 +50,7 @@ index f44efb1..9d817c6 100755
  #echo -e "\t\tLoad SIMDATA catalog"
  #mclient -p$port -h$host -d${dbname} < $MONETDBSIPHOME/load/load.cat.simdata.sql || exit 1
 diff --git a/CEP/GSM/db/load/load.cat.nvss.sql b/CEP/GSM/db/load/load.cat.nvss.sql
-index 61cd8d0..655c791 100644
+index 61cd8d0..b0b7c95 100644
 --- a/CEP/GSM/db/load/load.cat.nvss.sql
 +++ b/CEP/GSM/db/load/load.cat.nvss.sql
 @@ -57,8 +57,8 @@ CREATE TABLE aux_catalogedsources
@@ -61,12 +60,12 @@ index 61cd8d0..655c791 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/share/repos/tkp-data/catalogs/NVSS-all_strip.csv'
++ '/media/RAIDA/repos/tkp-data/catalogs/NVSS-all_strip.csv'
  USING DELIMITERS ';', '\n'
  NULL AS ''
  ;
 diff --git a/CEP/GSM/db/load/load.cat.vlss.sql b/CEP/GSM/db/load/load.cat.vlss.sql
-index 0c05d21..1c7faa8 100644
+index 0c05d21..6f78bd2 100644
 --- a/CEP/GSM/db/load/load.cat.vlss.sql
 +++ b/CEP/GSM/db/load/load.cat.vlss.sql
 @@ -48,8 +48,8 @@ CREATE TABLE aux_catalogedsources
@@ -76,12 +75,12 @@ index 0c05d21..1c7faa8 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/share/repos/tkp-data/catalogs/VLSS-all_strip.csv'
++ '/media/RAIDA/repos/tkp-data/catalogs/VLSS-all_strip.csv'
  USING DELIMITERS ';', '\n'
  NULL AS ''
  ;
 diff --git a/CEP/GSM/db/load/load.cat.wenss.sql b/CEP/GSM/db/load/load.cat.wenss.sql
-index c61cee3..3c56027 100644
+index c61cee3..be0032b 100644
 --- a/CEP/GSM/db/load/load.cat.wenss.sql
 +++ b/CEP/GSM/db/load/load.cat.wenss.sql
 @@ -82,8 +82,8 @@ CREATE TABLE aux_catalogedsources
@@ -91,31 +90,10 @@ index c61cee3..3c56027 100644
 -/* Uncomment here the absolute server path to the csv catalogue file  
 - '/something/like/catfiles/vlss/VLSS-all_strip.csv' */
 +-- Uncomment here the absolute server path to the csv catalogue file  
-+ '/opt/share/repos/tkp-data/catalogs/WENSS-all_strip.csv'
++ '/media/RAIDA/repos/tkp-data/catalogs/WENSS-all_strip.csv'
  USING DELIMITERS ';', '\n' 
  ;
  
-diff --git a/CEP/GSM/src/gsm.py b/CEP/GSM/src/gsm.py
-index ece32aa..1c82446 100755
---- a/CEP/GSM/src/gsm.py
-+++ b/CEP/GSM/src/gsm.py
-@@ -41,13 +41,12 @@ def gsmMain (name, argv):
-     if len(argv) > 5:
-         theta = float(argv[5])
- 
--    db_host = "ldb002"
-+    db_host = "lofar1"
-     #db_host = "napels"
-     db_dbase = "gsm"
-     db_user = "gsm"
--    db_passwd = "msss"
--    #db_passwd = "gsm"
--    db_port = 51000
-+    db_passwd = "gsm"
-+    db_port = 50000
-     db_autocommit = True
- 
-     try:
 -- 
-1.7.5.4
+1.7.9.5
 

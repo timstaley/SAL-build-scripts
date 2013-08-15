@@ -1,0 +1,33 @@
+From 09b278bb447ad17e411412f3b35d6b743984dcfb Mon Sep 17 00:00:00 2001
+From: Tim Staley <tim.staley@soton.ac.uk>
+Date: Thu, 15 Aug 2013 17:52:05 +0100
+Subject: [PATCH 2/2] Fix GSM.py database details for Soton cluster
+
+---
+ CEP/GSM/src/gsm.py |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CEP/GSM/src/gsm.py b/CEP/GSM/src/gsm.py
+index c427575..7f0aa11 100755
+--- a/CEP/GSM/src/gsm.py
++++ b/CEP/GSM/src/gsm.py
+@@ -47,13 +47,13 @@ def gsmMain (name, argv):
+     if len(argv) > st+5:
+         theta = float(argv[st+5])
+ 
+-    db_host = "ldb002"
++    db_host = "lofar1"
+     #db_host = "napels"
+     db_dbase = "gsm"
+     db_user = "gsm"
+-    db_passwd = "msss"
++    db_passwd = "gsm"
+     #db_passwd = "gsm"
+-    db_port = 51000
++    db_port = 50000
+     db_autocommit = True
+ 
+     try:
+-- 
+1.7.9.5
+
