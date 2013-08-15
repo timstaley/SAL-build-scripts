@@ -29,18 +29,18 @@ fi
 echo 
 echo "*** Creating install directories ***"
 ARCHIVE_TARGET=$LOFAR_BUILDS_DIR/`date +%F-%H-%M`
-echo "Target: ${TARGET}"
-mkdir -p $TARGET
+echo "Target: ${ARCHIVE_TARGET}"
+mkdir -p $ARCHIVE_TARGET
 
 #Make a pointer to the archive directory, so that other build scripts can find it at a later date.
 
-SYMLINKS=$TARGET/symlinks
+SYMLINKS=$ARCHIVE_TARGET/symlinks
 #make directory structure:
 mkdir -p $SYMLINKS/bin
 mkdir -p $SYMLINKS/lib
 mkdir -p $SYMLINKS/python-packages
 
-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 echo "*** Building Lofar Offline package... ***"
 
@@ -49,7 +49,7 @@ cd $LOFAR_SVNROOT
 SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 LOFAR_REV="${SVN_REV}_${GIT_HASH}"
-LOFAR_TARGET=$TARGET/LOFAR_r${LOFAR_REV}
+LOFAR_TARGET=$ARCHIVE_TARGET/LOFAR_r${LOFAR_REV}
 
 ln -sfn $ARCHIVE_TARGET $LOFAR_BUILDS_DIR/lofar-latest
 
@@ -76,10 +76,10 @@ cd build/gnu_opt
 #cd build/gnu_debug
 
 cmake_command="cmake $LOFAR_SVNROOT \
-    -DCASACORE_ROOT_DIR=${SYMLINKS}/casacore-root \
-    -DPYRAP_ROOT_DIR=${SYMLINKS}/pyrap-root         \
+    -DCASACORE_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casacore-active ) \
+    -DPYRAP_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/pyrap-active )         \
+    -DCASAREST_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casarest-active)   \
     -DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR     \
-    -DCASAREST_ROOT_DIR=${SYMLINKS}/casarest-root   \
     -DLOG4CPLUS_ROOT_DIR=$LOG4CPLUS_ROOT_DIR   \
     -DBUILD_SHARED_LIBS=ON                 \
     -DBUILD_PACKAGES=\"LofarFT Offline\"        \
