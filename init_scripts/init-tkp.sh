@@ -12,10 +12,10 @@
 # if a particular buildset is preferred.
 
 SAL_LOGDIR="$HOME/.salbuilds"
+SAL_INIT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 if [[ -z "$PREF_TKP_BUILD" ]];
 then
-    SAL_INIT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
     if ! [ -L $SAL_INIT_SCRIPT_DIR/default-build ]; then 
         echo "Please create a default-build pointing symlink, e.g. using"
         echo "ln -sfnv \$(readlink $SAL_INIT_SCRIPT_DIR/tkp-latest) $SAL_INIT_SCRIPT_DIR/default-build"
