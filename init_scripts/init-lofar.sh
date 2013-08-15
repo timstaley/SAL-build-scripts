@@ -25,9 +25,9 @@ then
     PREF_LOFAR_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-build && pwd -P )
 fi
 
-export PATH=${PATH:+${PATH}:}${PREF_LOFAR_BUILD}/bin 
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}${PREF_LOFAR_BUILD}/lib 
-export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}${PREF_LOFAR_BUILD}/python-packages 
+export PATH=${PREF_LOFAR_BUILD}/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=${PREF_LOFAR_BUILD}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PYTHONPATH=${PREF_LOFAR_BUILD}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
 export LOFARROOT=$PREF_LOFAR_BUILD
 
 #---------------------------------------------------------------------------

@@ -24,9 +24,9 @@ then
     PREF_TKP_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-build && pwd -P )
 fi
 
-export PATH=${PATH:+${PATH}:}${PREF_TKP_BUILD}/bin 
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}${PREF_TKP_BUILD}/lib 
-export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}${PREF_TKP_BUILD}/python-packages 
+export PATH=${PREF_TKP_BUILD}/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=${PREF_TKP_BUILD}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PYTHONPATH=${PREF_TKP_BUILD}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
 
 #---------------------------------------------------------------------------
 #Log which builds used when:

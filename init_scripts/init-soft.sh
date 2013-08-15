@@ -24,9 +24,9 @@ then
     PREF_SOFT_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-buildset && pwd -P )
 fi
 
-export PATH=${PATH:+${PATH}:}${PREF_SOFT_BUILD}/bin 
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}${PREF_SOFT_BUILD}/lib 
-export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}${PREF_SOFT_BUILD}/python-packages 
+export PATH=${PREF_SOFT_BUILD}/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=${PREF_SOFT_BUILD}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PYTHONPATH=${PREF_SOFT_BUILD}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
 
 #---------------------------------------------------------------------------
 #Log which builds used when:
