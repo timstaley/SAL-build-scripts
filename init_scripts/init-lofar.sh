@@ -14,6 +14,7 @@
 #Setup the various environment paths:
 SAL_LOGDIR="$HOME/.salbuilds"
 SAL_INIT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+SAL_PYTHON_VERSION=$(python -c "import sys; print sys.version[:3]")
 
 if [[ -z "$PREF_LOFAR_BUILD" ]];
 then
@@ -27,7 +28,7 @@ fi
 
 export PATH=${PREF_LOFAR_BUILD}/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=${PREF_LOFAR_BUILD}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export PYTHONPATH=${PREF_LOFAR_BUILD}/python-packages${PYTHONPATH:+:${PYTHONPATH}} 
+export PYTHONPATH=${PREF_LOFAR_BUILD}/lib/python${SAL_PYTHON_VERSION}/dist-packages${PYTHONPATH:+:${PYTHONPATH}} 
 export LOFARROOT=$PREF_LOFAR_BUILD
 
 #---------------------------------------------------------------------------
@@ -37,5 +38,6 @@ echo "$(date) --- $PREF_LOFAR_BUILD" >> $SAL_LOGDIR/lofar_builds_used.log
 echo "$(date) --- $PREF_LOFAR_BUILD --- $(whoami) --- $(hostname)" >> "${SAL_INIT_SCRIPT_DIR}/lofar_builds_used.log"
 unset SAL_LOGDIR
 unset SAL_INIT_SCRIPT_DIR
+unset SAL_PYTHON_VERSION
 #---------------------------------------------------------------------------
 
