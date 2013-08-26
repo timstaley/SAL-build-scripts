@@ -12,12 +12,9 @@ libpng12-dev
 libgsl0-dev					
 libfftw3-dev				
 libcfitsio3-dev				
-liblog4cxx10-dev			
 subversion					
 git-svn						
-python-setuptools				
-postgresql-client-common			
-postgresql-8.4          
+python-setuptools				  
 python-qt4					
 cmake						
 scons						

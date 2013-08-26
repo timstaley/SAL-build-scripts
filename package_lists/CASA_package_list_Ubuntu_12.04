@@ -1,0 +1,8 @@
+liblapack-dev
+libfftw3-dev				
+libcfitsio3-dev	
+subversion					
+git-svn											
+cmake						
+scons						
+gfortran					
