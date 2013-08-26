@@ -12,6 +12,7 @@ SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 PYRAP_REV="${SVN_REV}_${GIT_HASH}"
 BUILD_TARGET=$STABLE_SOFT_DIR/builds/pyrap/pyrap_r${PYRAP_REV}
+mkdir -p $BUILD_TARGET
 echo "Installing into $BUILD_TARGET"
 
 
