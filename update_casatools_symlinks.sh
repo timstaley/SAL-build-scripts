@@ -21,6 +21,8 @@ ln -sfnv $(readlink $STABLE_SOFT_DIR/builds/pyrap/pyrap-latest) $STABLE_SOFT_DIR
 #In fact, the following symlinks always point at the 'active' link, 
 #and so don't need overwriting - but we create them in case it's a first
 #build.
+mkdir -p $SYMLINKS/bin $SYMLINKS/lib $SYMLINKS/python-packages
+
 ln -sfnv $STABLE_SOFT_DIR/builds/casacore-active/bin $SYMLINKS/bin/casacore
 ln -sfnv $STABLE_SOFT_DIR/builds/casacore-active/lib $SYMLINKS/lib/casacore
 
