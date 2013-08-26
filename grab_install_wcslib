@@ -5,7 +5,7 @@ echo "*** Grabbing and installing wcslib ***"
 #Pull in general lofar build config:
 . `dirname ${0}`/CONFIG
 
-WCSLIB_VERSION=4.16
+WCSLIB_VERSION=4.18
 
 mkdir -p ${LOFAR_DEPS_ROOT}/wcslib
 cd ${LOFAR_DEPS_ROOT}/wcslib
