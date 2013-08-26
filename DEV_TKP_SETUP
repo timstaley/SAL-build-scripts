@@ -14,11 +14,15 @@ TARGET=`pwd -P`
 
 ####################################################################
 cd $TARGET/python-packages
+echo "mv:"
 mv -v tkp tkp-backup
+echo "ln:"
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp tkp
 
 cd $TARGET
+echo "mv:"
 mv -v bin bin-backup
+echo "ln:"
 ln -sfnv ${TKP_DEV_ROOT}/tkp/tkp/bin bin
 
 
