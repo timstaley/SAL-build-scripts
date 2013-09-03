@@ -24,8 +24,8 @@ cd build
 
 cmake_command="cmake $CASAREST_SVNROOT/trunk/casarest -DCMAKE_INSTALL_PREFIX=$BUILD_TARGET \
 	-DCASACORE_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casacore/casacore-latest ) \
-	-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR \
 	-DBUILD_ALL=1"
+#	-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR \
 
 echo $cmake_command > cmake_command.sh
 bash cmake_command.sh

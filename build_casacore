@@ -16,7 +16,10 @@ echo "Installing into $BUILD_TARGET"
 mkdir -p $BUILD_TARGET
 ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/casacore/casacore-latest
 
-scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --wcs-root=$WCSLIB_ROOT_DIR   --data-dir=$CASA_MEASURES/data install
+#Clean out any build cache:
+#git clean -f
+
+scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --data-dir=$CASA_MEASURES/data install
 
 check_result "casacore" "scons" $?
 

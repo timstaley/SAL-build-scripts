@@ -1,8 +1,11 @@
 liblapack-dev
 libfftw3-dev				
 libcfitsio3-dev	
+wcslib-dev
 subversion					
 git-svn											
 cmake						
 scons						
 gfortran					
+g++
+
