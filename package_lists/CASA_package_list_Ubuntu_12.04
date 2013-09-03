@@ -8,4 +8,5 @@ cmake
 scons						
 gfortran					
 g++
-
+libboost1.46-all-dev
+hdf5-tools libhdf5-serial-dev 
