@@ -1,0 +1,5 @@
+libxml2-dev		
+libreadline-dev
+libpcre3-dev
+unixodbc-dev
+libgeos-dev
