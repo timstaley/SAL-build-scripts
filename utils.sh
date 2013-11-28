@@ -93,7 +93,7 @@ update_git_repo() {
     else
         git checkout -f master
     fi
-    check_result "$SOURCEDIR update" "checkout master" $?
+    check_result "$SOURCEDIR update" "checkout $BRANCH" $?
     git pull
     check_result "$SOURCEDIR update" "pull" $?
     cd "$git_update_startdir"

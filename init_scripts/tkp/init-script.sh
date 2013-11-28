@@ -19,6 +19,7 @@ then
     if ! [ -L $SAL_INIT_SCRIPT_DIR/default-build ]; then 
         echo "Please create a default-build pointing symlink, e.g. using"
         echo "ln -sfnv \$(readlink $SAL_INIT_SCRIPT_DIR/tkp-latest) $SAL_INIT_SCRIPT_DIR/default-build"
+        echo "Please set a preferred build directory via PREF_TKP_BUILD."
         return 1
     fi    
     PREF_TKP_BUILD=$( cd $SAL_INIT_SCRIPT_DIR/default-build && pwd -P )

@@ -6,7 +6,7 @@ BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 source $BUILD_SCRIPTS_DIR/CONFIG
 
 TKP_DEV_ROOT=$HOME/code/tkp-dev
-DEV_INSTALL_TARGET=$TKP_BUILDS_DIR/tkp-dev
+DEV_INSTALL_TARGET=$TKP_BUILDS_DIR/dev
 
 ####################################################################
 cd $DEV_INSTALL_TARGET

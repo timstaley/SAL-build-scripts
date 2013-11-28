@@ -1,5 +1,10 @@
 #!/bin/bash
 ####################################################################
+BRANCH_TO_BUILD=$1
+if [[ -z "$BRANCH_TO_BUILD" ]]; then
+    BRANCH_TO_BUILD=master
+fi
+
 startdir=`pwd`
 BUILD_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 source $BUILD_SCRIPTS_DIR/CONFIG
@@ -9,7 +14,7 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 #Setup
 echo 
 echo "*** Creating install directories ***"
-ARCHIVE_TARGET=$TKP_BUILDS_DIR/`date +%F-%H-%M`
+ARCHIVE_TARGET=$TKP_BUILDS_DIR/${BRANCH_TO_BUILD}-builds/`date +%F-%H-%M`
 echo "Target: ${ARCHIVE_TARGET}"
 mkdir -p $ARCHIVE_TARGET
 
@@ -17,7 +22,7 @@ echo "Installing into $ARCHIVE_TARGET"
 
 #------------------------------------------------------------------------------
 if [[ -n $UPDATE_REPOS ]]; then
-	update_git_repo $TKP_SVNROOT/tkp
+	update_git_repo $TKP_SVNROOT/tkp $BRANCH_TO_BUILD
 	echo
 	echo "*** Sources updated ***"
 fi
@@ -32,8 +37,8 @@ TKP_SHA=$(get_git_short_hash)
 BUILD_TARGET=${ARCHIVE_TARGET}/tkp_${TKP_SHA}
 echo "TKP SHA tagged build target is $BUILD_TARGET"
 
-ln -sfn $BUILD_TARGET $TKP_BUILDS_DIR/tkp-latest
-cp $BUILD_SCRIPTS_DIR/init_scripts/init-tkp.sh $TKP_BUILDS_DIR
+ln -sfn $BUILD_TARGET $TKP_BUILDS_DIR/${BRANCH_TO_BUILD}-latest
+cp $BUILD_SCRIPTS_DIR/init_scripts/tkp/init-script.sh $TKP_BUILDS_DIR
 
 #----------------------------------------------------------------------------
 #Build and install TKP libs

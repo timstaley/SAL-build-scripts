@@ -27,9 +27,7 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 ########################################################
 
 ##Ok, install packages:
-## The standard method uses dpkg --set-selections, but that has proven buggy for me (TS, Ubuntu 12.04)
-## instead I recommend:
-sudo apt-get install  $(< LOFAR_package_list_Ubuntu_12.04)
+sudo apt-get install  $(< ${BUILD_SCRIPTS_DIR}/package_lists/CASA_package_list_Ubuntu_12.04)
 
 
 ########################################################
