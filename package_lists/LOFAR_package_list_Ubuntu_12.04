@@ -4,6 +4,7 @@ liblog4cxx10-dev
 libblitz0-dev					
 bison						
 flex						
+libgtkmm-2.4-dev
 libhdf5-serial-dev
 libpqxx3-dev				
 libxml2-dev					
