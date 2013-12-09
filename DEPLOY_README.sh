@@ -27,23 +27,28 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 ########################################################
 
 ##Ok, install packages:
+echo "Enter sudo password (just for apt-get):"
 sudo apt-get install  $(< ${BUILD_SCRIPTS_DIR}/package_lists/CASA_package_list_Ubuntu_12.04)
 
 
 ########################################################
 
+#Lofar repos first, for authentication:
+bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
+check_result "Grab libs" "lofar_svn_repos" $?
+
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
 check_result "Grab libs" "log4cplus" $?
-bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
-check_result "Grab libs" "wcslib" $?
+#bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
+#check_result "Grab libs" "wcslib" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
 check_result "Grab libs" "pygsl" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
 check_result "Grab libs" "psycopg" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_monetdb
 check_result "Grab libs" "monetdb" $?
-bash ${BUILD_SCRIPTS_DIR}/grab_lofar_svn_repos
-check_result "Grab libs" "lofar_svn_repos" $?
+bash ${BUILD_SCRIPTS_DIR}/grab_casatools_repos
+check_result "Grab libs" "casatools" $?
 
 ########################################################
 
@@ -51,16 +56,12 @@ check_result "Grab libs" "lofar_svn_repos" $?
 
 ########################################################
 mkdir -p ${STABLE_SOFT_DIR}
-ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/init-soft.sh ${STABLE_SOFT_DIR}
-ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/soft/reset-paths.sh ${STABLE_SOFT_DIR}
-
-mkdir -p ${LOFAR_BUILDS_ARCHIVE_DIR}
-ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/set_lofar_pipeline_env_paths.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
-ln -sn ${BUILD_SCRIPTS_DIR}/init_scripts/lofar-archive/collate_lofar_symlinks.sh ${LOFAR_BUILDS_ARCHIVE_DIR}
+cp ${BUILD_SCRIPTS_DIR}/init_scripts/init-soft.sh ${STABLE_SOFT_DIR}
 
 ########################################################
 ## Build!
-#bash ${BUILD_SCRIPTS_DIR}/BUILD_ALL.sh
+#bash ${BUILD_SCRIPTS_DIR}/BUILD_CASATOOLS.sh
+#bash ${BUILD_SCRIPTS_DIR}/BUILD_IMAGING.sh
 ########################################################
 #Now set up your postgres database.
 
