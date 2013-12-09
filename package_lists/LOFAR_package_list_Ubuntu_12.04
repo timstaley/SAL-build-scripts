@@ -22,6 +22,7 @@ scons
 gfortran					
 python-scipy				
 python-pyfits								
+python-psycopg2
 python-tz					
 procmail					
 xvfb						

@@ -39,12 +39,8 @@ check_result "Grab libs" "lofar_svn_repos" $?
 
 bash ${BUILD_SCRIPTS_DIR}/grab_install_log4cplus
 check_result "Grab libs" "log4cplus" $?
-#bash ${BUILD_SCRIPTS_DIR}/grab_install_wcslib
-#check_result "Grab libs" "wcslib" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_pygsl
 check_result "Grab libs" "pygsl" $?
-bash ${BUILD_SCRIPTS_DIR}/grab_install_psycopg
-check_result "Grab libs" "psycopg" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_install_monetdb
 check_result "Grab libs" "monetdb" $?
 bash ${BUILD_SCRIPTS_DIR}/grab_casatools_repos
