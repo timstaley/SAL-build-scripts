@@ -7,7 +7,7 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 #------------------------------------------------------------------------------
 echo "*** Checking out LOFAR ***"
 mkdir -p $LOFAR_SVNROOT 
-git svn clone --username $LOFAR_SVN_LOGIN -r22500 https://@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
+git svn clone --username $LOFAR_SVN_LOGIN -r25500 https://@svn.astron.nl/LOFAR/trunk $LOFAR_SVNROOT 
 cd $LOFAR_SVNROOT
 git svn fetch #For some reason, (https?) extra step required here.
 check_result "lofar repo" "get" $?
