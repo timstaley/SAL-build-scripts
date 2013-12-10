@@ -79,7 +79,6 @@ cmake_command="cmake $LOFAR_SVNROOT \
     -DCASACORE_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casacore-active ) \
     -DPYRAP_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/pyrap-active )         \
     -DCASAREST_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casarest-active)   \
-    -DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR     \
     -DLOG4CPLUS_ROOT_DIR=$LOG4CPLUS_ROOT_DIR   \
     -DBUILD_SHARED_LIBS=ON                 \
     -DBUILD_PACKAGES=\"LofarFT Offline\"        \

@@ -49,7 +49,6 @@ cd $TKP_SVNROOT/tkp/build
 
 cmake_command="cmake $TKP_SVNROOT/tkp -DCMAKE_INSTALL_PREFIX=${BUILD_TARGET} 
 		-DTKP_DEVELOP=1 
-		-DWCSLIB_ROOT_DIR=$WCSLIB_ROOT_DIR
 		-DPYTHON_PACKAGES_DIR=${BUILD_TARGET}/python-packages"
 echo $cmake_command > cmake_command.sh
 bash cmake_command.sh
