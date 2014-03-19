@@ -6,7 +6,7 @@ sleep 0.5
 echo "Done."
 
 
-cd $LOFAR_SRC_ROOT
+cd $REPOROOT/..
 rm -rf build/
 mkdir -p build/gnu_opt
 cd build/gnu_opt
