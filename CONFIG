@@ -51,8 +51,7 @@ CASACORE_SVNROOT=${SVN_GRP_DIR}/casacore_checkout/casacore
 CASAREST_SVNROOT=${SVN_GRP_DIR}/casarest_checkout
 CASA_MEASURES=$SVN_GRP_DIR/casa_measures
 
-LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout #will make build directory here.
-LOFAR_SVNROOT=$LOFAR_SRC_ROOT/LOFAR #Top dir of svn checkout Has to be "LOFAR" or the build will complain.
+LOFAR_SRC_ROOT=${SVN_GRP_DIR}/lofar_checkout 
 
 RSM_SRC_ROOT=${SVN_GRP_DIR}/rsm_imaging_checkout #will make build directory here.
 RSM_SVNROOT=$RSM_SRC_ROOT/LOFAR #Top dir of svn checkout Has to be "LOFAR" or the build will complain.
