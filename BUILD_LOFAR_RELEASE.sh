@@ -17,6 +17,20 @@ REPOROOT=$LOFAR_SRC_ROOT/$TAGPATH/LOFAR
 
 if [[ -n $DOWNLOAD_RELEASE ]]; then
     source $BUILD_SCRIPTS_DIR/grab_lofar_svn $TAGPATH
+    cd $REPOROOT
+    git clean -df
+    check_result "$REPOROOT update" "clean" $?
+    git checkout -f master
+    git svn rebase
+    check_result "$REPOROOT update" "svn rebase" $?
+    for patchfile in $PATCHES_GRP_DIR/lofar-patches/*patch
+    do
+        echo $patchfile
+        git apply $patchfile
+        check_result "LofIm" "git apply $patchfile" $?
+    done
+	echo
+	echo "*** Sources updated ***"
 fi
 
 
@@ -34,7 +48,7 @@ GIT_HASH=$(get_git_short_hash)
 LOFAR_REV="${SVN_REV}_${GIT_HASH}"
 LOFAR_TARGET=$ARCHIVE_TARGET/LOFAR_r${LOFAR_REV}
 
-ln -sfn $LOFAR_TARGET $LOFAR_BUILDS_DIR/release-$RELEASE_VER
+ln -sfn $LOFAR_TARGET $LOFAR_BUILDS_DIR/release-$RELEASE_VER-latest
 #------------------------------------------------------------------------------
 
 source $BUILD_SCRIPTS_DIR/build_lofim.sh
