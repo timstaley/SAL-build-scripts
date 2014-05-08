@@ -38,3 +38,4 @@ gawk
 ntp
 python-pip
 wcslib-dev
+python-pywcs
