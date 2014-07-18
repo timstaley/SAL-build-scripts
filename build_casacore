@@ -19,9 +19,20 @@ ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/casacore/casacore-latest
 #Clean out any build cache:
 #git clean -f
 
-scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --data-dir=$CASA_MEASURES/data install
+#scons -j $LOFAR_BUILD_NJOBS --prefix=$BUILD_TARGET  --enable-shared --disable-static  --data-dir=$CASA_MEASURES/data install
+rm -rf build
+mkdir build
+cd build
 
-check_result "casacore" "scons" $?
+cmake ..    -DCMAKE_INSTALL_PREFIX=$BUILD_TARGET \
+            -DDATA_DIR=$CASA_MEASURES/data 
+            
+
+check_result "casacore" "cmake" $?
+make -j $LOFAR_BUILD_NJOBS
+check_result "casacore" "make" $?
+make install
+check_result "casacore" "make install" $?
 
 ##Copy in the measures data:
 #mkdir -p $BUILD_TARGET/share/casacore/data
