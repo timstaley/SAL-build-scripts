@@ -15,12 +15,16 @@ BUILD_TARGET=$STABLE_SOFT_DIR/builds/pyrap/pyrap_r${PYRAP_REV}
 mkdir -p $BUILD_TARGET
 echo "Installing into $BUILD_TARGET"
 
+# Use this if numpy is not available system-wide 
+# (or if you want a specific version)
+NUMPY_VENV_INCLUDE_PATH=$HOME/code/tkp-dev/tkp/venv/lib/python2.7/site-packages/numpy/core/include
 
 ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/pyrap/pyrap-latest
 git clean -f
 build_command="./batchbuild-trunk.py  --prefix=$BUILD_TARGET \
+    --numpy-incdir=$NUMPY_VENV_INCLUDE_PATH \
     --casacore-root=$(readlink ${STABLE_SOFT_DIR}/builds/casacore/casacore-latest ) \
-	--python-prefix=$BUILD_TARGET/pythonpackage install"
+    --python-prefix=$BUILD_TARGET/pythonpackage install"
 #--wcs-root=$WCSLIB_ROOT_DIR 
 echo "$build_command" > pyrap_build_command.sh
 $build_command

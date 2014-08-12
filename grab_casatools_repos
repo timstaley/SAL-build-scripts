@@ -7,8 +7,11 @@ source $BUILD_SCRIPTS_DIR/utils.sh
 
 echo "*** Checking out casacore ***"
 mkdir -p  $CASACORE_SVNROOT 
-git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
-check_result "casacore repo" "get" $?
+#git svn clone -r21123 http://casacore.googlecode.com/svn/trunk/  $CASACORE_SVNROOT 
+#check_result "casacore repo" "get" $?
+cd $CASACORE_SVNROOT 
+wget ftp://ftp.atnf.csiro.au/pub/software/casacore/casacore-1.7.0.tar.bz2
+tar xf casacore-1.7.0.tar.bz2
 
 #Casacore needs latest 'measures' data for accurate co-ord conversions:
 mkdir -p cd $CASA_MEASURES
