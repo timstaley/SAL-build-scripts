@@ -9,7 +9,7 @@ echo "Build scripts are located under $BUILD_SCRIPTS_DIR"
 
 #------------------------------------------------------------------------------
 
-RELEASE_VER=2_7_4
+RELEASE_VER=2_10_0
 DOWNLOAD_RELEASE="t"
 
 TAGPATH=tags/LOFAR-Release-$RELEASE_VER
