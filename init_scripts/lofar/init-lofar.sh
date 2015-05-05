@@ -28,8 +28,13 @@ fi
 
 export PATH=${PREF_LOFAR_BUILD}/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=${PREF_LOFAR_BUILD}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export PYTHONPATH=${PREF_LOFAR_BUILD}/lib/python${SAL_PYTHON_VERSION}/dist-packages${PYTHONPATH:+:${PYTHONPATH}} 
 export LOFARROOT=$PREF_LOFAR_BUILD
+
+# LofIM used to install under /dist-packages, more recently switched to site-packages
+# For now, we add both to path, for compatibility:
+LOFAR_PYTHONROOT=${PREF_LOFAR_BUILD}/lib/python${SAL_PYTHON_VERSION}
+export PYTHONPATH=${LOFAR_PYTHONROOT}/site-packages:${LOFAR_PYTHONROOT}/dist-packages:${PYTHONPATH:+:${PYTHONPATH}} 
+
 
 #---------------------------------------------------------------------------
 #Log which builds used when:
