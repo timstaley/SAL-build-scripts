@@ -15,9 +15,9 @@ cd build/gnu_opt
 #cd build/gnu_debug
 
 cmake_command="cmake $REPOROOT \
-    -DCASACORE_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casacore-active ) \
-    -DPYRAP_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/pyrap-active )         \
-    -DCASAREST_ROOT_DIR=$(readlink ${STABLE_SOFT_DIR}/builds/casarest-active)   \
+    -DCASACORE_ROOT_DIR=${STABLE_SOFT_DIR}/casalibs/casacore-2.0.1  \
+    -DPYRAP_ROOT_DIR=${STABLE_SOFT_DIR}/casalibs/pycasacore-2.0.0-venv/lib/python2.7/site-packages \
+    -DCASAREST_ROOT_DIR=${STABLE_SOFT_DIR}/casalibs/casarest-r8765   \
     -DLOG4CPLUS_ROOT_DIR=$LOG4CPLUS_ROOT_DIR   \
     -DBUILD_SHARED_LIBS=ON                 \
     -DBUILD_PACKAGES=\"LofarFT Offline\"        \

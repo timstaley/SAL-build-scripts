@@ -10,3 +10,5 @@ gfortran
 g++
 libboost1.54-all-dev
 hdf5-tools libhdf5-serial-dev 
+bison						
+flex

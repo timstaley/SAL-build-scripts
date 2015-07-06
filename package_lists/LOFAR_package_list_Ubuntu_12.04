@@ -1,6 +1,6 @@
-libboost1.46-all-dev				
+libboost-all-dev
 libreadline-dev
-liblog4cxx10-dev				
+liblog4cplus-dev
 libblitz0-dev					
 bison						
 flex						
@@ -37,3 +37,4 @@ ntp
 python-pip
 wcslib-dev
 python-pywcs
+binutils-dev
