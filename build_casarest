@@ -12,7 +12,7 @@ cd $CASAREST_SVNROOT
 SVN_REV=$(get_git_svnrev)
 GIT_HASH=$(get_git_short_hash)
 CASAREST_REV="${SVN_REV}_${GIT_HASH}"
-BUILD_TARGET=$STABLE_SOFT_DIR/builds/casarest/casarest_r${CASAREST_REV}
+BUILD_TARGET=$STABLE_SOFT_DIR/builds/casarest/$(date +%F-%H-%M)/casarest_r${CASAREST_REV}
 echo "Installing into $BUILD_TARGET"
 mkdir -p $BUILD_TARGET
 ln -sfnv $BUILD_TARGET $STABLE_SOFT_DIR/builds/casarest/casarest-latest

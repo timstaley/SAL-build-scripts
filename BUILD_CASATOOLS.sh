@@ -5,9 +5,10 @@ source $BUILD_SCRIPTS_DIR/CONFIG
 source $BUILD_SCRIPTS_DIR/utils.sh
 ####################################################################
 
-CASAREST_REV=8760
+CASACORE_REV=21573
+#CASAREST_REV=8760
 if [[ -n $UPDATE_REPOS ]]; then
-#    update_svn_repo $CASACORE_SVNROOT $CASACORE_REV
+    update_svn_repo $CASACORE_SVNROOT $CASACORE_REV
     update_svn_repo $CASAREST_SVNROOT $CASAREST_REV
     update_svn_repo $PYRAP_SVNROOT $PYRAP_REV
     cd $PYRAP_SVNROOT

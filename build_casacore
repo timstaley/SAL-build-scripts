@@ -6,14 +6,15 @@ source $BUILD_SCRIPTS_DIR/CONFIG
 source $BUILD_SCRIPTS_DIR/utils.sh
 ####################################################################
 echo "*** Building casacore... ***"
-cd $CASACORE_SVNROOT/casacore-1.7.0
+cd $CASACORE_SVNROOT
+#cd $CASACORE_SVNROOT/casacore-1.7.0
 
-#SVN_REV=$(get_git_svnrev)
-#GIT_HASH=$(get_git_short_hash)
-#CASACORE_REV="${SVN_REV}_${GIT_HASH}"
-#BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/casacore_r${CASACORE_REV}
-CASACORE_REV="1.7.0"
-BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/casacore_${CASACORE_REV}
+SVN_REV=$(get_git_svnrev)
+GIT_HASH=$(get_git_short_hash)
+CASACORE_REV="${SVN_REV}_${GIT_HASH}"
+BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/$(date +%F-%H-%M)/casacore_r${CASACORE_REV}
+#CASACORE_REV="1.7.0"
+#BUILD_TARGET=$STABLE_SOFT_DIR/builds/casacore/casacore_${CASACORE_REV}
 
 echo "Installing into $BUILD_TARGET"
 mkdir -p $BUILD_TARGET
